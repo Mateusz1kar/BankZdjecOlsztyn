@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using BankZdjecOlsztyn.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -13,17 +10,22 @@ namespace BankZdjecOlsztyn
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));//³¹czenie z baz¹
+            services.AddTransient<IMiejscaRepozytory, MiejscaRepozytory>();
+
+            services.AddTransient<IMiejscaRepozytory, MiejscaRepozytory>();
+            //services.AddMvc();
             services.AddControllersWithViews();
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +47,12 @@ namespace BankZdjecOlsztyn
             app.UseRouting();
 
             app.UseAuthorization();
+
+            //z 2.1
+            app.UseDeveloperExceptionPage();
+            app.UseStatusCodePages();
+            app.UseStaticFiles();
+            //
 
             app.UseEndpoints(endpoints =>
             {

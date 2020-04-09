@@ -2,7 +2,19 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@model BankZdjecOlsztyn.ViewsModels.HomeViewsModel
+
+
+<h2 class="col-12">@Model.Tytul</h2>
+
+@foreach (var miejsce in Model.Miejsca)
+{
+
+    <div class="col-sm-6 col-lg-4">
+        <h3>@miejsce.Id</h3>
+        <h3>@miejsce.Nazwa </h3>
+        <h4>@miejsce.Opis</h4>
+        
+
+    </div>
+}

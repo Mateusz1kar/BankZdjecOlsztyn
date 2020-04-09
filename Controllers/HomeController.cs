@@ -6,32 +6,41 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BankZdjecOlsztyn.Models;
+using BankZdjecOlsztyn.ViewsModels;
 
 namespace BankZdjecOlsztyn.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IMiejscaRepozytory _miejscaRepozytory;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IMiejscaRepozytory miejsceRepository)
         {
-            _logger = logger;
+            _miejscaRepozytory = miejsceRepository;
+            //_miejscaRepozytory = new MockMiejscaRepozytory();//bez wstrzykiwania zalerzności
         }
 
+        // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
-        }
+            //zmienna dynamiczm
+            //ViewBag.Title="Przegląd miast";
+            //mocne typowanie
+            var miejsca = _miejscaRepozytory.PobierzWszustkieMiejsca().OrderBy(s => s.Nazwa);
+            var homeVM = new HomeViewsModel()
+            {
+                Tytul = "Przeglad miast",
+                Miejsca = miejsca.ToList()
+            };
 
-        public IActionResult Privacy()
+
+
+
+            return View(homeVM);
+        }
+        public IActionResult Mapa()
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
