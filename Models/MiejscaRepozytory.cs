@@ -9,6 +9,7 @@ namespace BankZdjecOlsztyn.Models
     {
         private readonly AppDbContext _appDbContext;
 
+        
         public MiejscaRepozytory(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
@@ -21,6 +22,17 @@ namespace BankZdjecOlsztyn.Models
         public IEnumerable<Miejsce> PobierzWszustkieMiejsca()
         {
             return _appDbContext.Miejsca;
+        }
+
+        public void dodajMiejsce(Miejsce miejsce)
+        {
+            _appDbContext.Miejsca.Add(miejsce);
+            _appDbContext.SaveChanges();
+        }
+        public void delMiejsce(int id)
+        {
+            _appDbContext.Miejsca.Remove(PobierzMiejsceId(id));
+            _appDbContext.SaveChanges();
         }
     }
 }

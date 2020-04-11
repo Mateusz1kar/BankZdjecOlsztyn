@@ -9,6 +9,7 @@ namespace BankZdjecOlsztyn.ViewsModels
     public class HomeViewsModel
     {
         public string Tytul { get; set; }
+        public int id2 { get; set; }
         public List<Miejsce> Miejsca { get; set; }
     }
 }

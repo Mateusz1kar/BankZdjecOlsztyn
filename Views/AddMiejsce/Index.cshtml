@@ -1,0 +1,47 @@
+﻿@model Miejsce
+
+    <form asp-action="Index" method="post" class="form-horizontal " role="form">
+       
+        <div asp-validation-summary="All" class="text-danger"></div>
+        
+        <div class="form-group">
+            <label asp-for="Nazwa" class="col-2 custom-control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="Nazwa" class="form-control" />
+                <span asp-validation-summary="Nazwa" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Opis" class="col-2 custom-control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="Opis" class="form-control" />
+                <span asp-validation-summary="Opis" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="szerokosc" class="col-2 custom-control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="szerokosc" class="form-control" />               
+                <span asp-validation-summary="szerokosc" class="text-danger"></span>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="wysokosc" class="col-2 custom-control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="wysokosc" class="form-control" />              
+                <span asp-validation-summary="wysokosc" class="text-danger"></span>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-5">
+                <input type="submit" class="btn btn-primary" />              
+
+            </div>
+        </div>
+    </form>

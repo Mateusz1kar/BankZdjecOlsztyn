@@ -4,17 +4,24 @@
 
 @model BankZdjecOlsztyn.ViewsModels.HomeViewsModel
 
-
 <h2 class="col-12">@Model.Tytul</h2>
 
 @foreach (var miejsce in Model.Miejsca)
 {
 
-    <div class="col-sm-6 col-lg-4">
-        <h3>@miejsce.Id</h3>
-        <h3>@miejsce.Nazwa </h3>
-        <h4>@miejsce.Opis</h4>
-        
+<div class="col-sm-6 col-lg-4">
+    <h3>@miejsce.Id</h3>
+    <h3>@miejsce.Nazwa </h3>
+    <h4>@miejsce.Opis</h4>
 
-    </div>
+    <form asp-controller="DelMiejsce" asp-action="Delete"  method="post" class="form-horizontal " role="form">
+        <div class="col-md-5 " style="display:none">
+            <input asp-for="id2" value="@miejsce.Id"/>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Delete" class="btn btn-primary" />
+        </div>
+    </form>
+
+</div>
 }
