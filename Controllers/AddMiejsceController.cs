@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using BankZdjecOlsztyn.Models;
+using BankZdjecOlsztyn.ViewsModels;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,10 +15,12 @@ namespace BankZdjecOlsztyn.Controllers
     public class AddMiejsceController : Controller
     {
         private readonly IMiejscaRepozytory _IMiejscaRepozytory;
+        private readonly IHostingEnvironment hostingEnvironment; //komunikacja z forderem root
 
-        public AddMiejsceController(IMiejscaRepozytory miejsceRepozytory)
+        public AddMiejsceController(IMiejscaRepozytory miejsceRepozytory, IHostingEnvironment hostingEnvironment)
         {
             _IMiejscaRepozytory = miejsceRepozytory;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
 
@@ -26,15 +31,41 @@ namespace BankZdjecOlsztyn.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(Miejsce miejsce)
+        public IActionResult Index(MiastoAddViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _IMiejscaRepozytory.dodajMiejsce(miejsce);
-                return RedirectToAction("miejsceZgloszone");
+                string uniquefileName = null;
+                if (model.Zdiencie != null)
+                {
+                    string uploatFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                    uniquefileName = Guid.NewGuid().ToString() + "_" + model.Zdiencie.FileName;
+                    string filePath = Path.Combine(uploatFolder, uniquefileName);
+                    model.Zdiencie.CopyTo(new FileStream(filePath, FileMode.Create));
+                    Miejsce newMiejsce = new Miejsce
+                    {
+                        Nazwa = model.Nazwa,
+                        Opis = model.Opis,
+                        ZdiencieUrl = uniquefileName,
+                        szerokosc = model.szerokosc,
+                        wysokosc = model.wysokosc
+                    };
+                    _IMiejscaRepozytory.dodajMiejsce(newMiejsce);
+                    return RedirectToAction("miejsceZgloszone");
+                }
+                
             }
-            return View(miejsce);
+            return View(model);
         }
+        //public IActionResult Index(Miejsce miejsce)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _IMiejscaRepozytory.dodajMiejsce(miejsce);
+        //        return RedirectToAction("miejsceZgloszone");
+        //    }
+        //    return View(miejsce);
+        //}
         public IActionResult miejsceZgloszone()
         {
             return View();
