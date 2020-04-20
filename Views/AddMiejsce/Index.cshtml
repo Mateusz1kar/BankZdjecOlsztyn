@@ -1,27 +1,29 @@
 ﻿@model BankZdjecOlsztyn.ViewsModels.MiastoAddViewModel
 
-    <form enctype="multipart/form-data" asp-action="Index" method="post" class="form-horizontal " role="form">
+<h3 id="form_h"  >Prześlij nam swoje zdjęcia!</h3>
+<br />
+<form enctype="multipart/form-data" asp-action="Index" class="col-lg-6 offset-lg-3" method="post" role="form">
 
         <div asp-validation-summary="All" class="text-danger"></div>
-
+        
         <div class="form-group">
-            <label asp-for="Nazwa" class="col-2 custom-control-label"></label>
-            <div class="col-md-5">
+            <label asp-for="Nazwa" class="col-2 custom-control-label">Nazwa</label>
+            <div class="col-sm-10">
                 <input asp-for="Nazwa" class="form-control" />
                 <span asp-validation-summary="Nazwa" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Opis" class="col-2 custom-control-label"></label>
-            <div class="col-md-5">
+            <label asp-for="Opis" class="col-2 custom-control-label">Opis</label>
+            <div class="col-sm-10">
                 <input asp-for="Opis" class="form-control" />
                 <span asp-validation-summary="Opis" class="text-danger"></span>
             </div>
         </div>
 
         <div class="form-group">
-            <label asp-for="Zdiencie" class="col-sm-2 col-form-label"></label>
+            <label asp-for="Zdiencie" class="col-sm-2 col-form-label">Zdjęcie</label>
             <div class="col-sm-10">
                 <div class="custom-file">
                     <input asp-for="Zdiencie" class="form-control custom-file-input" />
@@ -31,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="szerokosc" class="col-sm-2 custom-control-label"></label>
+            <label asp-for="szerokosc" class="col-sm-2 custom-control-label">Szerokość</label>
             <div class="col-sm-10">
                 <input asp-for="szerokosc" class="form-control" />
                 <span asp-validation-summary="szerokosc" class="text-danger"></span>
@@ -40,8 +42,8 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="wysokosc" class="col-2 custom-control-label"></label>
-            <div class="col-md-5">
+            <label asp-for="wysokosc" class="col-2 custom-control-label">Wysokość</label>
+            <div class="col-sm-10">
                 <input asp-for="wysokosc" class="form-control" />
                 <span asp-validation-summary="wysokosc" class="text-danger"></span>
 

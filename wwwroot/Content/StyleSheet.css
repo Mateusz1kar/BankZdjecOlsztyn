@@ -3,7 +3,11 @@
     padding-bottom:20px;
     background:#8eddf2;
 }
-.body-content{
-    padding-left:10px;
-    padding-right:10px;
+.body-content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#form_h{
+    margin:0,auto,5px,auto;
 }
