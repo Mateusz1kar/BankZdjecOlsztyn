@@ -12,5 +12,19 @@ namespace BankZdjecOlsztyn.Models
 
         }
         public DbSet<Miejsce> Miejsca { get; set; }
+        //public DbSet<Tag> Tagi { get; set; }
+        public DbSet<Zdjecie> Zdjecia { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Miejsce>();
+            builder.Entity<Zdjecie>();
+            //builder.Entity<Tag>();
+            base.OnModelCreating(builder);
+        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+
+        //}
     }
 }

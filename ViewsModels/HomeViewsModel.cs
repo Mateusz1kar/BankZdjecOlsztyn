@@ -11,5 +11,6 @@ namespace BankZdjecOlsztyn.ViewsModels
         public string Tytul { get; set; }
         public int id2 { get; set; }
         public List<Miejsce> Miejsca { get; set; }
+        public List<Zdjecie> Zdjecia { get; set; }
     }
 }

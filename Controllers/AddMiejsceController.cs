@@ -16,11 +16,12 @@ namespace BankZdjecOlsztyn.Controllers
     {
         private readonly IMiejscaRepozytory _IMiejscaRepozytory;
         private readonly IHostingEnvironment hostingEnvironment; //komunikacja z forderem root
-
-        public AddMiejsceController(IMiejscaRepozytory miejsceRepozytory, IHostingEnvironment hostingEnvironment)
+       // private readonly IZdjecieRepozytory _zdjecieRepozytory;
+        public AddMiejsceController( IMiejscaRepozytory miejsceRepozytory, IHostingEnvironment hostingEnvironment)
         {
             _IMiejscaRepozytory = miejsceRepozytory;
             this.hostingEnvironment = hostingEnvironment;
+            //_zdjecieRepozytory = zdjecieRepozytory;
         }
 
 
@@ -42,14 +43,22 @@ namespace BankZdjecOlsztyn.Controllers
                     uniquefileName = Guid.NewGuid().ToString() + "_" + model.Zdiencie.FileName;
                     string filePath = Path.Combine(uploatFolder, uniquefileName);
                     model.Zdiencie.CopyTo(new FileStream(filePath, FileMode.Create));
+                  
+                    //_zdjecieRepozytory.dodajZdjecie(newZdjecie);
+                    
                     Miejsce newMiejsce = new Miejsce
                     {
                         Nazwa = model.Nazwa,
                         Opis = model.Opis,
-                        ZdiencieUrl = uniquefileName,
+                        ZdieciaList = new List<Zdjecie>(),
                         szerokosc = model.szerokosc,
                         wysokosc = model.wysokosc
                     };
+                    newMiejsce.ZdieciaList.Add(new Zdjecie
+                    {
+                        Url = uniquefileName
+
+                    });
                     _IMiejscaRepozytory.dodajMiejsce(newMiejsce);
                     return RedirectToAction("miejsceZgloszone");
                 }

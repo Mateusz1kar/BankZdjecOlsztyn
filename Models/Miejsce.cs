@@ -9,7 +9,7 @@ namespace BankZdjecOlsztyn.Models
     public class Miejsce
     {
         //[BindNever]
-        public int Id { get; set; }
+        public int MiejsceId { get; set; }
 
         [Required(ErrorMessage ="Nazwa jest wymagana")]
         [StringLength(188,ErrorMessage ="Nazwa za długa")]
@@ -19,8 +19,7 @@ namespace BankZdjecOlsztyn.Models
         [StringLength(588, ErrorMessage = "Opis za długa")]
         public string Opis { get; set; }
 
-        public string ZdiencieUrl { get; set; }
-        public string MinniaturkaUrl { get; set; }
+        public List<Zdjecie> ZdieciaList { get; set; }
 
         [Required(ErrorMessage = "Szerokosc  geograficzna jest wymagana")]
         //[DataType(DataType.)]

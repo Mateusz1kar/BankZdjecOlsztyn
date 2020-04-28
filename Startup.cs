@@ -23,6 +23,7 @@ namespace BankZdjecOlsztyn
             services.AddTransient<IMiejscaRepozytory, MiejscaRepozytory>();
 
             services.AddTransient<IMiejscaRepozytory, MiejscaRepozytory>();
+            services.AddTransient<IZdjecieRepozytory, ZdjenciaRepozytory>();
             //services.AddMvc();
             services.AddControllersWithViews();
           

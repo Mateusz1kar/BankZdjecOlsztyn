@@ -16,7 +16,7 @@ namespace BankZdjecOlsztyn.Models
         }
         public Miejsce PobierzMiejsceId(int miejsceId)
         {
-            return _appDbContext.Miejsca.FirstOrDefault(m => m.Id == miejsceId);
+            return _appDbContext.Miejsca.FirstOrDefault(m => m.MiejsceId == miejsceId);
         }
 
         public IEnumerable<Miejsce> PobierzWszustkieMiejsca()
