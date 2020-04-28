@@ -4,26 +4,29 @@
     box-sizing: border-box;
 }
 
+.navbar-bg{
+    background-color:#106269;
+
+}
 body {
-    padding-top:30px;
-    padding-bottom:20px;
-    background:#8eddf2;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    background: #edece4;
 }
 .body-content {
     padding-left: 10px;
     padding-right: 10px;
 }
 
-@media (max-width: 1000px) {
-    .navbar-collapse.collapse:not(.in) {
-        display: none !important;
-    }
-}
-
 #navbarSupportedContent {
     z-index: 9999;
 }
 
-.in{
-    height:120px;
+
+.collapse:not(.in) {
+    display: none
+}
+
+.collapse.in {
+    display: block
 }
