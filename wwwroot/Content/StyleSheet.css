@@ -14,8 +14,16 @@ body {
     padding-right: 10px;
 }
 
-
+@media (max-width: 1000px) {
+    .navbar-collapse.collapse:not(.in) {
+        display: none !important;
+    }
+}
 
 #navbarSupportedContent {
     z-index: 9999;
+}
+
+.in{
+    height:120px;
 }
