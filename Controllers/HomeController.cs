@@ -44,7 +44,15 @@ namespace BankZdjecOlsztyn.Controllers
         }
         public IActionResult Mapa()
         {
-            return View();
+            var miejsca = _miejscaRepozytory.PobierzWszustkieMiejsca().OrderBy(s => s.Nazwa);
+            var zdjecia = _zdjecieRepozytory.PobierzWszustkieZdjecie();
+            var homeVM = new HomeViewsModel()
+            {
+                Tytul = "Przeglad miast",
+                Miejsca = miejsca.ToList(),
+                Zdjecia = zdjecia.ToList()
+            };
+            return View(homeVM);
         }
     }
 }
