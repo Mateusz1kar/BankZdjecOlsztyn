@@ -14,11 +14,14 @@ namespace BankZdjecOlsztyn.Controllers
     {
         private readonly IMiejscaRepozytory _miejscaRepozytory;
         private readonly IZdjecieRepozytory _zdjecieRepozytory;
-
-        public HomeController(IMiejscaRepozytory miejsceRepository, IZdjecieRepozytory zdjecieRepozytory)
+        private readonly ITagRepozytory _tagRepozytory;
+        private readonly IMiejsceTagRepozytory _miejsceTagRepozytory;
+        public HomeController(IMiejscaRepozytory miejsceRepository, IZdjecieRepozytory zdjecieRepozytory, ITagRepozytory tagRepozytory, IMiejsceTagRepozytory miejsceTagRepozytory)
         {
             _miejscaRepozytory = miejsceRepository;
             _zdjecieRepozytory = zdjecieRepozytory;
+            _tagRepozytory = tagRepozytory;
+            _miejsceTagRepozytory = miejsceTagRepozytory;
             //_miejscaRepozytory = new MockMiejscaRepozytory();//bez wstrzykiwania zalerzności
         }
 
@@ -30,11 +33,16 @@ namespace BankZdjecOlsztyn.Controllers
             //mocne typowanie
             var miejsca = _miejscaRepozytory.PobierzWszustkieMiejsca().OrderBy(s => s.Nazwa);
             var zdjecia =_zdjecieRepozytory.PobierzWszustkieZdjecie();
+            var tagi = _tagRepozytory.PobierzWszustkieTagi();
+            var miejsceTag = _miejsceTagRepozytory.PobierzWszustkieMijescaTagi();
             var homeVM = new HomeViewsModel()
             {
                 Tytul = "Przeglad miast",
                 Miejsca = miejsca.ToList(),
-                Zdjecia = zdjecia.ToList()
+                Zdjecia = zdjecia.ToList(),
+                Tagi = tagi.ToList(),
+                MiejscaTagi = miejsceTag.ToList()
+
             };
 
 
@@ -51,6 +59,7 @@ namespace BankZdjecOlsztyn.Controllers
                 Tytul = "Przeglad miast",
                 Miejsca = miejsca.ToList(),
                 Zdjecia = zdjecia.ToList()
+                
             };
             return View(homeVM);
         }

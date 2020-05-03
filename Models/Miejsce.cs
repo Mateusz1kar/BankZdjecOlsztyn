@@ -19,6 +19,7 @@ namespace BankZdjecOlsztyn.Models
         [StringLength(588, ErrorMessage = "Opis za długa")]
         public string Opis { get; set; }
 
+        public List<MiejsceTag> MiejsceTag { get; set; }
         public List<Zdjecie> ZdieciaList { get; set; }
 
         [Required(ErrorMessage = "Szerokosc  geograficzna jest wymagana")]

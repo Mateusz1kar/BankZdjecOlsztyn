@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using BankZdjecOlsztyn.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace BankZdjecOlsztyn.ViewsModels
 {
@@ -27,5 +31,13 @@ namespace BankZdjecOlsztyn.ViewsModels
 
         [Required(ErrorMessage = "wysokosc geograficzna jest wymagana")]
         public double wysokosc { get; set; }
+
+        public List<Tag> Tagi { get; set; }
+        
+
+        [HtmlAttributeName("asp-checklistbox")]
+        public IEnumerable<SelectListItem> Items { get; set; }
+        [BindProperty]
+        public List<int> AreChecked { get; set; }
     }
 }

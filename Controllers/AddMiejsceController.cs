@@ -15,12 +15,15 @@ namespace BankZdjecOlsztyn.Controllers
     public class AddMiejsceController : Controller
     {
         private readonly IMiejscaRepozytory _IMiejscaRepozytory;
-        private readonly IHostingEnvironment hostingEnvironment; //komunikacja z forderem root
+        private readonly IHostingEnvironment hostingEnvironment;
+        private readonly ITagRepozytory _tagRepozytory;
+        //komunikacja z forderem root
        // private readonly IZdjecieRepozytory _zdjecieRepozytory;
-        public AddMiejsceController( IMiejscaRepozytory miejsceRepozytory, IHostingEnvironment hostingEnvironment)
+        public AddMiejsceController( IMiejscaRepozytory miejsceRepozytory, IHostingEnvironment hostingEnvironment, ITagRepozytory tagRepozytory)
         {
             _IMiejscaRepozytory = miejsceRepozytory;
             this.hostingEnvironment = hostingEnvironment;
+            _tagRepozytory = tagRepozytory;
             //_zdjecieRepozytory = zdjecieRepozytory;
         }
 
@@ -28,12 +31,15 @@ namespace BankZdjecOlsztyn.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            MiastoAddViewModel model = new MiastoAddViewModel();
+            model.Tagi = _tagRepozytory.PobierzWszustkieTagi().ToList();
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult Index(MiastoAddViewModel model)
         {
+            
             if (ModelState.IsValid)
             {
                 string uniquefileName = null;
@@ -51,6 +57,7 @@ namespace BankZdjecOlsztyn.Controllers
                         Nazwa = model.Nazwa,
                         Opis = model.Opis,
                         ZdieciaList = new List<Zdjecie>(),
+                        MiejsceTag= new List<MiejsceTag>(),
                         szerokosc = model.szerokosc,
                         wysokosc = model.wysokosc
                     };
@@ -59,11 +66,24 @@ namespace BankZdjecOlsztyn.Controllers
                         Url = uniquefileName
 
                     });
+
+                    foreach (int item in model.AreChecked)
+                    {
+                      
+                        newMiejsce.MiejsceTag.Add(new MiejsceTag
+                        {
+                            TagId = item,
+                            Tag= _tagRepozytory.PobierzTagId(item),
+                            MiejsceId = newMiejsce.MiejsceId,
+                            Miejsce = newMiejsce
+                        });;
+                    }
                     _IMiejscaRepozytory.dodajMiejsce(newMiejsce);
                     return RedirectToAction("miejsceZgloszone");
                 }
                 
             }
+            model.Tagi = _tagRepozytory.PobierzWszustkieTagi().ToList();
             return View(model);
         }
         //public IActionResult Index(Miejsce miejsce)

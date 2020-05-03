@@ -15,7 +15,11 @@
     <h3>@miejsce.MiejsceId</h3>
     <h3>@miejsce.Nazwa </h3>
     <h4>@miejsce.Opis</h4>
-   
+    @foreach (var item in miejsce.MiejsceTag)
+    {
+        <h5 class="text-primary">@item.Tag.Nazwa</h5>
+    }
+
     <form asp-controller="DelMiejsce" asp-action="Delete" method="post" class="form-horizontal " role="form">
         <div class="col-md-5 " style="display:none">
             <input asp-for="id2" value="@miejsce.MiejsceId" />
@@ -27,4 +31,5 @@
 
 </div>
 }
+
 

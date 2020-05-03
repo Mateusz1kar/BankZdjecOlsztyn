@@ -12,5 +12,7 @@ namespace BankZdjecOlsztyn.ViewsModels
         public int id2 { get; set; }
         public List<Miejsce> Miejsca { get; set; }
         public List<Zdjecie> Zdjecia { get; set; }
+        public List<MiejsceTag> MiejscaTagi { get; set; }
+        public List<Tag> Tagi { get; set; }
     }
 }

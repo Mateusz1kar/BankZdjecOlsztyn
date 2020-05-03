@@ -9,12 +9,24 @@ namespace BankZdjecOlsztyn.Models
     {
         public static void Seed(AppDbContext context)
         {
-            if (!context.Miejsca.Any())
+            if (!context.Tagi.Any())
             {
-                //context.AddRange(
-                //    new Miejsce { Nazwa = "miejsce 1", Opis = "opis 1", ZdiencieUrl = "", MinniaturkaUrl = "", szerokosc =2, wysokosc = 2 },
-                //    new Miejsce { Nazwa = "miejsce 2", Opis = "opis 2", ZdiencieUrl = "", MinniaturkaUrl = "", szerokosc = 2, wysokosc = 2 }
-                //    );
+                context.AddRange(
+                    new Tag { Nazwa = "Widokowe" },
+                    new Tag { Nazwa = "Naukowe " },
+                    new Tag { Nazwa = "Dostępne dla niepełnosprawnych ruchowo" },
+                    new Tag { Nazwa = "Dla dzieci" },
+                    new Tag { Nazwa = "Można z psem" },
+                    new Tag { Nazwa = "Historyczne" },
+                    new Tag { Nazwa = "Wypoczynkowe" },
+                    new Tag { Nazwa = "Młodzieżowe " },
+                    new Tag { Nazwa = "Inne" },
+                    new Tag { Nazwa = "Rozrywka" },
+                    new Tag { Nazwa = "Darmowy wstęp" },
+                    new Tag { Nazwa = "Płatny wstęp" },
+                    new Tag { Nazwa = "Dla dorosłych" },
+                    new Tag { Nazwa = "Ograniczone czasowo" }
+                    );
             }
             context.SaveChanges();
         }
