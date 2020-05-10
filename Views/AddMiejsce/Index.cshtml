@@ -1,29 +1,86 @@
 ﻿@model BankZdjecOlsztyn.ViewsModels.MiastoAddViewModel
-    @*<script runat="server">
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,URL"></script>
+<style>
+    .map {
+        width: 100%;
+        height: 400px;
+    }
 
-        void Check_Clicked(Object sender, EventArgs e)
-        {
+    #marker {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #088;
+        border-radius: 10px;
+        background-color: #0FF;
+        opacity: 0.5;
+    }
 
-           Message.Text = "Selected Item(s):<br /><br />";
+    #vienna {
+        text-decoration: none;
+        color: white;
+        font-size: 11pt;
+        font-weight: bold;
+        text-shadow: black 0.1em 0.1em 0.2em;
+    }
 
-           // Iterate through the Items collection of the CheckBoxList
-           // control and display the selected items.
-           for (int i=0; i<checkboxlist1.Items.Count; i++)
-           {
+    .popover-content {
+        min-width: 180px;
+    }
+</style>
+<style>
+    .map {
+        width: 100%;
+        height: 400px;
+    }
 
-              if (checkboxlist1.Items[i].Selected)
-              {
+    .ol-popup {
+        position: absolute;
+        background-color: white;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;
+        bottom: 12px;
+        left: -50px;
+        min-width: 280px;
+    }
 
-                 Message.Text += checkboxlist1.Items[i].Text + "<br />";
-
-              }
-
-           }
-
+        .ol-popup:after, .ol-popup:before {
+            top: 100%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
         }
 
-    </script>*@
-<h3 id="form_h"  >Posiadasz zdjęcia, którymi chcesz się podzielić? Prześlij je nam!</h3>
+        .ol-popup:after {
+            border-top-color: white;
+            border-width: 10px;
+            left: 48px;
+            margin-left: -10px;
+        }
+
+        .ol-popup:before {
+            border-top-color: #cccccc;
+            border-width: 11px;
+            left: 48px;
+            margin-left: -11px;
+        }
+
+    .ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+        top: 2px;
+        right: 8px;
+    }
+
+        .ol-popup-closer:after {
+            content: "✖";
+        }
+</style>
+<h3 id="form_h">Posiadasz zdjęcia, którymi chcesz się podzielić? Prześlij je nam!</h3>
 <br />
 <form enctype="multipart/form-data" asp-action="Index" id="sever" class="col-lg-6 offset-lg-3" method="post" role="form">
 
@@ -56,9 +113,9 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="szerokosc" class="col-sm-2 custom-control-label">Szerokość geograficzna</label>
+        <label asp-for="szerokosc" class="col-sm-2 custom-control-label" >Szerokość geograficzna</label>
         <div class="col-sm-10">
-            <input asp-for="szerokosc" class="form-control" />
+            <input asp-for="szerokosc"id="szerokosc" class="form-control" />
             <span asp-validation-summary="szerokosc" class="text-danger"></span>
 
         </div>
@@ -67,7 +124,7 @@
     <div class="form-group">
         <label asp-for="wysokosc" class="col-2 custom-control-label">Wysokość geograficzna</label>
         <div class="col-sm-10">
-            <input asp-for="wysokosc" class="form-control" />
+            <input asp-for="wysokosc" class="form-control" id="wysokosc" />
             <span asp-validation-summary="wysokosc" class="text-danger"></span>
 
         </div>
@@ -99,10 +156,10 @@
                 </label>
             </div>
         }
-     
+
 
     </asp:CheckBoxList>
-   
+
 
     @section Scripts {
         <script>
@@ -114,39 +171,86 @@
             });
         </script>
     }
+    <div class="col-12 text-center" id="wspuzlende">wspułżedne</div>
 </form>
 
 
-    <form id="form1" runat="server">
+<div id="map" class="map" class="col-lg-6 offset-lg-3"></div>
+<div id="popup" class="ol-popup">
+    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    <div id="popup-content"></div>
+</div>
 
-        <h3> CheckBoxList Example </h3>
 
-        Select items from the CheckBoxList.
+<div style="display: none;">
+    <!-- Clickable label for Vienna -->
+    <a class="overlay" id="vienna" target="_blank" href="http://en.wikipedia.org/wiki/Vienna">Vienna</a>
+    <div id="marker" title="Marker"></div>
+    <!-- Popup -->
+    <div id="popup" title="Welcome to OpenLayers"></div>
+</div>
+<script type="text/javascript">
 
-        <br /><br />
+    
+     var wydzial = ol.proj.fromLonLat([20.45594, 53.74374]);
+        var view = new ol.View({
+            center: wydzial,
+            zoom: 11
+        });
+    var layer = new ol.layer.Tile({
+                  preload: 3,
+                  source: new ol.source.OSM(),
+        source: new ol.source.OSM()
+    });
 
-        <asp:CheckBoxList id="checkboxlist1"
-                          AutoPostBack="True"
-                          CellPadding="5"
-                          CellSpacing="5"
-                          RepeatColumns="2"
-                          RepeatDirection="Vertical"
-                          RepeatLayout="Flow"
-                          TextAlign="Right"
-                          OnSelectedIndexChanged="Check_Clicked"
-                          runat="server">
+    var map = new ol.Map({
+        layers: [layer],
+        target: 'map',
+        view: view
+    });
 
-            <asp:ListItem>Item 1</asp:ListItem>
-            <asp:ListItem>Item 2</asp:ListItem>
-            <asp:ListItem>Item 3</asp:ListItem>
-            <asp:ListItem>Item 4</asp:ListItem>
-            <asp:ListItem>Item 5</asp:ListItem>
-            <asp:ListItem>Item 6</asp:ListItem>
+    //var pos = ol.fromLonLat([16.3725, 48.208889]);
 
-        </asp:CheckBoxList>
+    //// Vienna marker
+    //var marker = new ol.Overlay({
+    //    position: pos,
+    //    positioning: 'center-center',
+    //    element: document.getElementById('marker'),
+    //    stopEvent: false
+    //});
+    //map.addOverlay(marker);
 
-        <br /><br />
+    //// Vienna label
+    //var vienna = new ol.Overlay({
+    //    position: pos,
+    //    element: document.getElementById('vienna')
+    //});
+    //map.addOverlay(vienna);
 
-        <asp:label id="Message" runat="server" AssociatedControlID="checkboxlist1" />
+    //// Popup showing the position the user clicked
+    //var popup = new ol.Overlay({
+    //    element: document.getElementById('popup')
+    //});
+    //map.addOverlay(popup);
 
-    </form>
+    map.on('click', function (evt) {
+        //var element = popup.getElement();
+        var coordinate = evt.coordinate;
+        var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
+        const tab = [...hdms];
+        const szer = "" + tab[0] + tab[1] + "." + tab[4] + tab[5] + tab[8] + tab[9];
+        const wys = "" + tab[14] + tab[15] + "." + tab[18] + tab[19] + tab[22] + tab[23];
+        document.getElementById('wspuzlende').innerHTML = hdms;
+        document.getElementById('szerokosc').value =parseFloat( szer);
+        document.getElementById('wysokosc').value = parseFloat(wys);
+        //$(element).popover('destroy');
+        //popup.setPosition(coordinate);
+        //$(element).popover({
+        //    placement: 'top',
+        //    animation: false,
+        //    html: true,
+        //    content: '<p>The location you clicked was:</p><code>' + hdms + '</code>'
+        //});
+        //$(element).popover('show');
+    });
+</script>
