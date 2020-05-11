@@ -36,22 +36,25 @@
                 <li class="nav-item active">
                     <a href="@Url.Action("Index", "AddMiejsce")" class="nav-link">Zgłoszenia <span class="sr-only"></span></a>
                 </li>
-
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li>  <a href="@Url.Action("Admin","Home")" class="nav-link">Admin <span class="sr-only"></span></a></li>
             </ul>
         </div>
 
     </nav>
-  
-    <div class="container body-content">
-        <div class="row">
-            @RenderBody()
+    <div id="page-container">
+        <div class="container body-content " id="content-wrap">
+            <div class="row">
+                @RenderBody()
+            </div>
+            @if (IsSectionDefined("Scripts"))
+            {
+                @RenderSection("Scripts", required: true)
+            }
         </div>
-        @if (IsSectionDefined("Scripts"))
-        {
-            @RenderSection("Scripts", required: true)
-        }
+        <footer id="footer">Copyright &copy; J4k</footer>
     </div>
-
 
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>

@@ -6,8 +6,9 @@
 
 .navbar-bg{
     background-color:#106269;
-
 }
+
+
 body {
     padding-top: 30px;
     padding-bottom: 20px;
@@ -30,3 +31,22 @@ body {
 .collapse.in {
     display: block
 }
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-top: 30px;
+    padding-bottom: 2.5rem; /* Footer height */
+}
+
+#footer {
+    background-color: #106269;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem; /* Footer height */
+}
+
