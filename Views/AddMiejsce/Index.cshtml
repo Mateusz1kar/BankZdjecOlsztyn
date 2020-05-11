@@ -238,11 +238,11 @@
         var coordinate = evt.coordinate;
         var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
         const tab = [...hdms];
-        const szer = "" + tab[0] + tab[1] + "." + tab[4] + tab[5] + tab[8] + tab[9];
-        const wys = "" + tab[14] + tab[15] + "." + tab[18] + tab[19] + tab[22] + tab[23];
+        const szer = "" + tab[0] + tab[1] + "," + tab[4] + tab[5] + tab[8] + tab[9];
+        const wys = "" + tab[14] + tab[15] + "," + tab[18] + tab[19] + tab[22] + tab[23];
         document.getElementById('wspuzlende').innerHTML = hdms;
-        document.getElementById('szerokosc').value =parseFloat( szer);
-        document.getElementById('wysokosc').value = parseFloat(wys);
+        document.getElementById('szerokosc').value = szer;//parseFloat(szer);
+        document.getElementById('wysokosc').value = wys;//parseFloat(wys);
         //$(element).popover('destroy');
         //popup.setPosition(coordinate);
         //$(element).popover({

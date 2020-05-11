@@ -66,18 +66,28 @@ namespace BankZdjecOlsztyn.Controllers
                         Url = uniquefileName
 
                     });
-
-                    foreach (int item in model.AreChecked)
+                    if(model.AreChecked==null)
                     {
-                      
                         newMiejsce.MiejsceTag.Add(new MiejsceTag
                         {
-                            TagId = item,
-                            Tag= _tagRepozytory.PobierzTagId(item),
+                            TagId = 9,
+                            Tag = _tagRepozytory.PobierzTagId(9),
                             MiejsceId = newMiejsce.MiejsceId,
                             Miejsce = newMiejsce
-                        });;
+                        }); ;
                     }
+                    else
+                        foreach (int item in model.AreChecked)
+                        {
+                      
+                            newMiejsce.MiejsceTag.Add(new MiejsceTag
+                            {
+                                TagId = item,
+                                Tag= _tagRepozytory.PobierzTagId(item),
+                                MiejsceId = newMiejsce.MiejsceId,
+                                Miejsce = newMiejsce
+                            });;
+                        }
                     _IMiejscaRepozytory.dodajMiejsce(newMiejsce);
                     return RedirectToAction("miejsceZgloszone");
                 }
