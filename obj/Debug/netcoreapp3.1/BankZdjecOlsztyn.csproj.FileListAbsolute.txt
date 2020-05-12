@@ -255,7 +255,6 @@ C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\bin\Debug\netcoreapp3.1\runti
 C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\staticwebassets\BankZdjecOlsztyn.StaticWebAssets.Manifest.cache
 C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\staticwebassets\BankZdjecOlsztyn.StaticWebAssets.xml
-C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.RazorAssemblyInfo.cache
 C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.RazorAssemblyInfo.cs
 C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.AssemblyInfoInputs.cache
@@ -280,3 +279,11 @@ C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZ
 C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.dll
 C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.pdb
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.csprojAssemblyReference.cache
+C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Core.dll
+C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
