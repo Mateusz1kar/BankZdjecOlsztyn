@@ -1,86 +1,108 @@
-﻿
-<div id="map" class="map col-12"></div>
+﻿@model BankZdjecOlsztyn.ViewsModels.HomeViewsModel
+    <div id="map" class="map col-8"></div>
+<div class="row">
+    
+    <div class="col-4">
+        @foreach (var item in Model.Miejsca)
+        {
+
+        }
+
+    </div>
+</div>
+
 <script type="text/javascript">
     var mcdonald = new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.fromLonLat([20.47746, 53.77309]))
-      });
+    });
 
-      var wydzial = new ol.Feature({
-          geometry: new ol.geom.Point(ol.proj.fromLonLat([20.45594,53.74374]))
-      });
+    var wydzial = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([20.45594, 53.74374]))
+    });
 
-      var plywalnia = new ol.Feature({
-          geometry: new ol.geom.Point(ol.proj.fromLonLat([20.46583, 53.75738]))
-      });
-
-
-      var wieza = new ol.Feature({
-          geometry: new ol.geom.Point(ol.proj.fromLonLat([20.5175, 53.75342]))
-      });
-
-      var szpital = new ol.Feature({
-          geometry: new ol.geom.Point(ol.proj.fromLonLat([20.49235, 53.76985]))
-      });
+    var plywalnia = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([20.46583, 53.75738]))
+    });
 
 
-      var vectorSource = new ol.source.Vector({
+    var wieza = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([20.5175, 53.75342]))
+    });
+
+    var szpital = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat([20.49235, 53.76985]))
+    });
+
+
+    var vectorSource = new ol.source.Vector({
         features: [mcdonald, wydzial, plywalnia, wieza, szpital]
-      });
+    });
 
 
 
-    var wydzial = ol.proj.fromLonLat([20.45594,53.74374]);
-var view = new ol.View({
-  center: wydzial,
-  zoom: 11
-});
+    var wydzial = ol.proj.fromLonLat([20.45594, 53.74374]);
+    var view = new ol.View({
+        center: wydzial,
+        zoom: 11
+    });
 
-var vectorSource = new ol.source.Vector({});
-var places = [
-    [20.47746, 53.77309, 'http://maps.google.com/mapfiles/ms/micons/blue.png'], [20.45594,53.74374,'http://maps.google.com/mapfiles/ms/micons/blue.png'],  
-    [20.46583, 53.75738,'http://maps.google.com/mapfiles/ms/micons/blue.png'],
-    [20.5175, 53.75342,'http://maps.google.com/mapfiles/ms/micons/blue.png',],
-    [20.49235, 53.76985,'http://maps.google.com/mapfiles/ms/micons/blue.png'],
-];
+    var vectorSource = new ol.source.Vector({});
+    var places = [ 
+   
+        //[20.47746, 53.77309, 'http://maps.google.com/mapfiles/ms/micons/blue.png'], [20.45594, 53.74374, 'http://maps.google.com/mapfiles/ms/micons/blue.png'],
+        //[20.46583, 53.75738, 'http://maps.google.com/mapfiles/ms/micons/blue.png'],
+        //[20.5175, 53.75342, 'http://maps.google.com/mapfiles/ms/micons/blue.png',],
+        //[20.49235, 53.76985, 'http://maps.google.com/mapfiles/ms/micons/blue.png'],
+    ];
+    var ile = @Model.Miejsca.Count ;
+    for (var i = 0; i < ile; i++) {
 
-var features = [];
-for (var i = 0; i < places.length; i++) {
-  var iconFeature = new ol.Feature({
-    geometry: new ol.geom.Point(ol.proj.transform([places[i][0], places[i][1]], 'EPSG:4326', 'EPSG:3857')),
-  });
+        places[i] = [];
+        places[i][0] =  @Model.Miejsca[Model.I_Net].wysokosc;
+        places[i][1] =   @Model.Miejsca[Model.I_Net].szerokosc ;
+        places[i][2] ='http://maps.google.com/mapfiles/ms/micons/blue.png';
+    }
+    places[1][0] =  @Model.Miejsca[2].wysokosc;
+        places[1][1] =   @Model.Miejsca[2].szerokosc ;
 
-      
-  var iconStyle = new ol.style.Style({
-    image: new ol.style.Icon({
-      src: places[i][2],
-      color: places[i][3],
-      crossOrigin: 'anonymous',
-    })
-  });
-  iconFeature.setStyle(iconStyle);
-  vectorSource.addFeature(iconFeature);
-}
-
+    var features = [];
+    for (var i = 0; i < places.length; i++) {
+        var iconFeature = new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.transform([places[i][0], places[i][1]], 'EPSG:4326', 'EPSG:3857')),
+        });
 
 
-var vectorLayer = new ol.layer.Vector({
-  source: vectorSource,
-  updateWhileAnimating: true,
-  updateWhileInteracting: true
-});
+        var iconStyle = new ol.style.Style({
+            image: new ol.style.Icon({
+                src: places[i][2],
+                color: places[i][3],
+                crossOrigin: 'anonymous',
+            })
+        });
+        iconFeature.setStyle(iconStyle);
+        vectorSource.addFeature(iconFeature);
+    }
 
-var map = new ol.Map({
-  target: 'map',
-  view: view,
-  layers: [
-    new ol.layer.Tile({
-      preload: 3,
-      source: new ol.source.OSM(),
-    }),
-    vectorLayer,
-  ],
-  loadTilesWhileAnimating: true,
-});
+
+
+    var vectorLayer = new ol.layer.Vector({
+        source: vectorSource,
+        updateWhileAnimating: true,
+        updateWhileInteracting: true
+    });
+
+    var map = new ol.Map({
+        target: 'map',
+        view: view,
+        layers: [
+            new ol.layer.Tile({
+                preload: 3,
+                source: new ol.source.OSM(),
+            }),
+            vectorLayer,
+        ],
+        loadTilesWhileAnimating: true,
+    });
 </script>
 
 

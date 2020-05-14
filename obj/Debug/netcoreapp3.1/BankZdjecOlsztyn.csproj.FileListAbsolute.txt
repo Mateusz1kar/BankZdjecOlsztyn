@@ -278,7 +278,6 @@ C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZ
 C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.csproj.CopyComplete
 C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.dll
 C:\Users\PC COMPUTER\Source\Repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.pdb
-C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.csprojAssemblyReference.cache
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -287,3 +286,4 @@ C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\bin\Debug\netcoreapp3.1\Micro
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.csprojAssemblyReference.cache
