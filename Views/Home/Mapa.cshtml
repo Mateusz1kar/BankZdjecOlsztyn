@@ -47,24 +47,40 @@
     });
 
     var vectorSource = new ol.source.Vector({});
-    var places = [ 
-   
+    var places = [
+
         //[20.47746, 53.77309, 'http://maps.google.com/mapfiles/ms/micons/blue.png'], [20.45594, 53.74374, 'http://maps.google.com/mapfiles/ms/micons/blue.png'],
         //[20.46583, 53.75738, 'http://maps.google.com/mapfiles/ms/micons/blue.png'],
         //[20.5175, 53.75342, 'http://maps.google.com/mapfiles/ms/micons/blue.png',],
         //[20.49235, 53.76985, 'http://maps.google.com/mapfiles/ms/micons/blue.png'],
     ];
     var ile = @Model.Miejsca.Count ;
+    var tabS =[@foreach (var item in Model.Miejsca)
+        {
+            @((item.szerokosc * 1000000).ToString() +',' )
+    },
+    ];
+
+    var tabW = [@foreach (var item in Model.Miejsca)
+        {
+             @((item.wysokosc * 1000000).ToString() +',' )
+    },
+    ];
+
+
     for (var i = 0; i < ile; i++) {
 
         places[i] = [];
-        places[i][0] =  @Model.Miejsca[Model.I_Net].wysokosc;
-        places[i][1] =   @Model.Miejsca[Model.I_Net].szerokosc ;
+        places[i][0] = tabW[i]/1000000;
+        places[i][1] = tabS[i]/1000000;
         places[i][2] ='http://maps.google.com/mapfiles/ms/micons/blue.png';
     }
-    places[1][0] =  @Model.Miejsca[2].wysokosc;
-        places[1][1] =   @Model.Miejsca[2].szerokosc ;
-
+    @*places[1][0] =  @Model.Miejsca[Model.I_Net].wysokosc;
+    places[1][1] =   @Model.Miejsca[Model.I_Net++].szerokosc ;
+    places[2][0] =  @Model.Miejsca[Model.I_Net].wysokosc;
+        places[2][1] =   @Model.Miejsca[Model.I_Net++].szerokosc ;*@
+    console.log(tabW);
+    console.log(places);
     var features = [];
     for (var i = 0; i < places.length; i++) {
         var iconFeature = new ol.Feature({
