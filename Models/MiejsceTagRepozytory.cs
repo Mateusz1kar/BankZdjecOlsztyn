@@ -17,17 +17,26 @@ namespace BankZdjecOlsztyn.Models
         {
             _appDbContext.MiejscTagi.Remove(PobierzMiejsceTagId(idM,IdT));
             _appDbContext.SaveChanges();
+
         }
 
         public void delMiejsceTagM(int id)
         {
-            _appDbContext.MiejscTagi.Remove(PobierzMiejsceTagIdM(id));
+            //_appDbContext.MiejscTagi.Remove(PobierzMiejsceTagIdM(id));
+            foreach (var item in PobierzMiejsceTagIdM(id))
+            {
+                _appDbContext.MiejscTagi.Remove(item);
+            }
             _appDbContext.SaveChanges();
         }
 
         public void delMiejsceTagT(int id)
         {
-            _appDbContext.MiejscTagi.Remove(PobierzMiejsceTagIdT(id));
+            //_appDbContext.MiejscTagi.Remove(PobierzMiejsceTagIdT(id));
+            foreach (var item in PobierzMiejsceTagIdT(id))
+            {
+                _appDbContext.MiejscTagi.Remove(item);
+            }
             _appDbContext.SaveChanges();
         }
 
@@ -37,14 +46,14 @@ namespace BankZdjecOlsztyn.Models
             _appDbContext.SaveChanges();
         }
 
-        public MiejsceTag PobierzMiejsceTagIdM(int Id)
+        public IEnumerable<MiejsceTag> PobierzMiejsceTagIdM(int Id)
         {
-            return _appDbContext.MiejscTagi.FirstOrDefault(mt => mt.MiejsceId == Id);
+            return _appDbContext.MiejscTagi.Where(mt => mt.MiejsceId == Id);
         }
 
-        public MiejsceTag PobierzMiejsceTagIdT(int Id)
+        public IEnumerable<MiejsceTag> PobierzMiejsceTagIdT(int Id)
         {
-            return _appDbContext.MiejscTagi.FirstOrDefault(mt =>  mt.TagId == Id);
+            return _appDbContext.MiejscTagi.Where(mt =>  mt.TagId == Id);
         }
 
         public MiejsceTag PobierzMiejsceTagId(int IdM, int IdT)
@@ -55,6 +64,16 @@ namespace BankZdjecOlsztyn.Models
         public IEnumerable<MiejsceTag> PobierzWszustkieMijescaTagi()
         {
             return _appDbContext.MiejscTagi;
+        }
+
+        MiejsceTag IMiejsceTagRepozytory.PobierzMiejsceTagIdM(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        MiejsceTag IMiejsceTagRepozytory.PobierzMiejsceTagIdT(int Id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

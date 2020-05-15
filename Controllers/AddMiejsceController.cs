@@ -60,6 +60,8 @@ namespace BankZdjecOlsztyn.Controllers
                         MiejsceTag= new List<MiejsceTag>(),
                         szerokosc = model.szerokosc,
                         wysokosc = model.wysokosc
+                        
+
                     };
                     newMiejsce.ZdieciaList.Add(new Zdjecie
                     {

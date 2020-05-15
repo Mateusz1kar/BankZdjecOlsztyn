@@ -20,6 +20,7 @@ namespace BankZdjecOlsztyn.Models
         public string Opis { get; set; }
 
         public List<MiejsceTag> MiejsceTag { get; set; }
+        public List<TrasaMiejsce> TrasyMiejsca { get; set; }
         public List<Zdjecie> ZdieciaList { get; set; }
 
         [Required(ErrorMessage = "Szerokosc  geograficzna jest wymagana")]

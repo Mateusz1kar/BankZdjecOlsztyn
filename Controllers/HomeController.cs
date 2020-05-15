@@ -41,7 +41,9 @@ namespace BankZdjecOlsztyn.Controllers
                 Miejsca = miejsca.ToList(),
                 Zdjecia = zdjecia.ToList(),
                 Tagi = tagi.ToList(),
-                MiejscaTagi = miejsceTag.ToList()
+                MiejscaTagi = miejsceTag.ToList(),
+                
+                
 
             };
 
