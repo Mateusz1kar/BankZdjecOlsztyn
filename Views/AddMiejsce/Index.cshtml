@@ -1,90 +1,9 @@
 ﻿@model BankZdjecOlsztyn.ViewsModels.MiastoAddViewModel
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,URL"></script>
-<style>
-    .map {
-        width: 100%;
-        height: 400px;
-    }
-
-    #marker {
-        width: 20px;
-        height: 20px;
-        border: 1px solid #088;
-        border-radius: 10px;
-        background-color: #0FF;
-        opacity: 0.5;
-    }
-
-    #vienna {
-        text-decoration: none;
-        color: white;
-        font-size: 11pt;
-        font-weight: bold;
-        text-shadow: black 0.1em 0.1em 0.2em;
-    }
-
-    .popover-content {
-        min-width: 180px;
-    }
-</style>
-<style>
-    .map {
-        width: 100%;
-        height: 400px;
-    }
-
-    .ol-popup {
-        position: absolute;
-        background-color: white;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-        padding: 15px;
-        border-radius: 10px;
-        border: 1px solid #cccccc;
-        bottom: 12px;
-        left: -50px;
-        min-width: 280px;
-    }
-
-        .ol-popup:after, .ol-popup:before {
-            top: 100%;
-            border: solid transparent;
-            content: " ";
-            height: 0;
-            width: 0;
-            position: absolute;
-            pointer-events: none;
-        }
-
-        .ol-popup:after {
-            border-top-color: white;
-            border-width: 10px;
-            left: 48px;
-            margin-left: -10px;
-        }
-
-        .ol-popup:before {
-            border-top-color: #cccccc;
-            border-width: 11px;
-            left: 48px;
-            margin-left: -11px;
-        }
-
-    .ol-popup-closer {
-        text-decoration: none;
-        position: absolute;
-        top: 2px;
-        right: 8px;
-    }
-
-        .ol-popup-closer:after {
-            content: "✖";
-        }
-</style>
-<h3 id="form_h">Posiadasz zdjęcia, którymi chcesz się podzielić? Prześlij je nam!</h3>
-<br />
 <form enctype="multipart/form-data" asp-action="Index" id="sever" class="col-lg-6 offset-lg-3" method="post" role="form">
 
     <div asp-validation-summary="All" class="text-danger"></div>
+    <h2 id="form_h">Prześlij nam swoje zdjęcie!</h2>
 
     <div class="form-group">
         <label asp-for="Nazwa" class="col-2 custom-control-label">Nazwa</label>
@@ -113,9 +32,34 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="szerokosc" class="col-sm-2 custom-control-label" >Szerokość geograficzna</label>
         <div class="col-sm-10">
-            <input asp-for="szerokosc"id="szerokosc" class="form-control" />
+            <button type="button" data-toggle="modal" data-target="myModal" id="myBtn">Wybierz współrzędne</button>
+
+        </div>
+    </div>
+
+    <div id="myModal" role="dialog" class="modal  ">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Wybierz punkt</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="map" class="map col-lg-6 offset-lg-3"></div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="col-12 text-center" id="wspuzlende">Wybrane współrzędne</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="szerokosc" class="col-sm-2 custom-control-label">Szerokość geograficzna</label>
+        <div class="col-sm-10">
+            <input asp-for="szerokosc" id="szerokosc" class="form-control" />
             <span asp-validation-summary="szerokosc" class="text-danger"></span>
 
         </div>
@@ -129,36 +73,40 @@
 
         </div>
     </div>
+    <div id="list1" class="dropdown-check-list form-group" tabindex="100">
+        <span class="anchor">Wybierz tagi</span>
+        <ul id="items" class="items">
+            <asp:CheckBoxList id="checkboxlist1"
+                              AutoPostBack="True"
+                              CellPadding="5"
+                              CellSpacing="5"
+                              RepeatColumns="2"
+                              RepeatDirection="Vertical"
+                              RepeatLayout="Flow"
+                              TextAlign="Right"
+                              OnSelectedIndexChanged="Check_Clicked"
+                              runat="server">
+                @foreach (Tag item in Model.Tagi)
+                {
+                    <li id="item">
+                        <input name="AreChecked" type="checkbox" value="@item.TagId" id="@item.Nazwa checker">
+                        <label for="@item.Nazwa">
+                            <asp:ListItem Value="@item.TagId"> @item.Nazwa </asp:ListItem>
+                            @*@item.Nazwa*@
+                        </label>
+                    </li>
+                }
 
-    <div class="form-group">
-        <div class="col-md-5">
-            <input type="submit" class="btn btn-primary" />
 
-        </div>
+            </asp:CheckBoxList>
+        </ul>
     </div>
-    <asp:CheckBoxList id="checkboxlist1"
-                      AutoPostBack="True"
-                      CellPadding="5"
-                      CellSpacing="5"
-                      RepeatColumns="2"
-                      RepeatDirection="Vertical"
-                      RepeatLayout="Flow"
-                      TextAlign="Right"
-                      OnSelectedIndexChanged="Check_Clicked"
-                      runat="server">
-        @foreach (Tag item in Model.Tagi)
-        {
-            <div class="form-check">
-                <input class="form-check-input" name="AreChecked" type="checkbox" value="@item.TagId" id="@item.Nazwa">
-                <label class="form-check-label" for="@item.Nazwa">
-                    <asp:ListItem Value="@item.TagId"> @item.Nazwa </asp:ListItem>
-                    @*@item.Nazwa*@
-                </label>
-            </div>
-        }
+    <div class="col-md-5">
+        <input type="submit" class="btn btn-primary" />
 
+    </div>
+    </div>
 
-    </asp:CheckBoxList>
 
 
     @section Scripts {
@@ -171,7 +119,11 @@
             });
         </script>
     }
-    <div class="col-12 text-center" id="wspuzlende">wspułżedne</div>
+
+
+
+
+
 </form>
 
 
@@ -191,15 +143,15 @@
 </div>
 <script type="text/javascript">
 
-    
-     var wydzial = ol.proj.fromLonLat([20.45594, 53.74374]);
-        var view = new ol.View({
-            center: wydzial,
-            zoom: 11
-        });
+
+    var wydzial = ol.proj.fromLonLat([20.45594, 53.74374]);
+    var view = new ol.View({
+        center: wydzial,
+        zoom: 11
+    });
     var layer = new ol.layer.Tile({
-                  preload: 3,
-                  source: new ol.source.OSM(),
+        preload: 3,
+        source: new ol.source.OSM(),
         source: new ol.source.OSM()
     });
 
@@ -253,4 +205,32 @@
         //});
         //$(element).popover('show');
     });
+</script>
+
+<script type="text/javascript">
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 </script>
