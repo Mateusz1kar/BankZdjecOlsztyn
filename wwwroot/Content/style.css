@@ -1,0 +1,296 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.map {
+    width: 100%;
+    height: 400px;
+}
+
+.navbar-bg {
+    background-color: #106269;
+}
+
+body {
+    padding-top: 30px;
+    padding-bottom: 20px;
+    background: #edece4;
+}
+
+.body-content {
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: calc(100vh - 70px);
+}
+
+
+.footer {
+    margin-top: 12px;
+    height: 50px;
+    background-color: #106269;
+}
+
+#navbarSupportedContent {
+    z-index: 9999;
+}
+
+
+.collapse:not(.in) {
+    display: none
+}
+
+.collapse.in {
+    display: block
+}
+
+nav ul ul {
+    position: absolute;
+    background-color: #dcab78;
+    width: 134px;
+    list-style: none;
+}
+
+#elem_nav {
+    display: block;
+    padding: 15px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+}
+
+    #elem_nav:hover {
+        color: #dcab78;
+    }
+
+#dropdown {
+    color: #ffffff;
+}
+
+
+nav ul li a,
+visited {
+    display: block;
+    padding: 15px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+}
+
+#sever {
+    padding: 15px;
+    margin: auto;
+    border-radius: 11px;
+    border: 2px solid #dcab78;
+    background-color: #ffffff;
+}
+
+#form_h {
+    margin: auto;
+    padding: 9px;
+}
+
+.dropdown-active {
+    background-color: #dcab78;
+}
+
+    .dropdown-active a,
+    visited {
+        color: #ffffff;
+    }
+
+#drop_elem:hover {
+    background-color: #956e58;
+}
+
+/*modal*/
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    -webkit-animation-name: fadeIn; /* Fade in the background */
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+/* Modal Content */
+.modal-content {
+    position: fixed;
+    bottom: 0;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #dcab78;
+    color: #956e58;
+}
+
+.modal-body {
+    padding: 2px 16px;
+}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #dcab78;
+    color: #956e58;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}
+
+@keyframes slideIn {
+    from {
+        bottom: -300px;
+        opacity: 0
+    }
+
+    to {
+        bottom: 0;
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+/*dropdown*/
+
+.dropdown-check-list {
+    display: inline-block;
+}
+
+    .dropdown-check-list .anchor {
+        position: relative;
+        cursor: pointer;
+        display: inline-block;
+        padding: 5px 50px 5px 10px;
+        border: 1px solid #ccc;
+    }
+
+        .dropdown-check-list .anchor:after {
+            position: absolute;
+            content: "";
+            border-left: 2px solid black;
+            border-top: 2px solid black;
+            padding: 5px;
+            right: 10px;
+            top: 20%;
+            -moz-transform: rotate(-135deg);
+            -ms-transform: rotate(-135deg);
+            -o-transform: rotate(-135deg);
+            -webkit-transform: rotate(-135deg);
+            transform: rotate(-135deg);
+        }
+
+        .dropdown-check-list .anchor:active:after {
+            right: 8px;
+            top: 21%;
+        }
+
+    .dropdown-check-list ul.items {
+        padding: 2px;
+        display: none;
+        margin: 0;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+#items.items.visible {
+    position: absolute;
+    background-color: #dcab78;
+    z-index: 995;
+}
+
+.dropdown-check-list ul.items li {
+    list-style: none;
+}
+
+.dropdown-check-list.visible .anchor {
+    color: #0094ff;
+}
+
+.dropdown-check-list.visible .items {
+    display: block;
+}
+
+
+#items {
+    border-radius: 9px;
+}
+
+#item {
+    padding: 1px;
+    border-bottom: 1px solid #956e58;
+}
+
+input[type=checkbox] {
+    transform: scale(1.5);
+    margin: 2px;
+    padding: 3px;
+    border: 1px dotted #956e58
+}
