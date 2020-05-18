@@ -1,9 +1,6 @@
 {
   "ExpandedNodes": [
     "",
-    "\\bin\\Debug",
-    "\\bin\\Debug\\netcoreapp3.1",
-    "\\bin\\Release\\netcoreapp3.1",
     "\\Models",
     "\\Views",
     "\\Views\\Shared",

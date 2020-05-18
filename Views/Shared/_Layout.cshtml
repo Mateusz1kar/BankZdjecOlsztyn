@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
-
+﻿@using Microsoft.AspNetCore.Identity;
+<!DOCTYPE html>
+@inject SignInManager<IdentityUser>  SingInManager      
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -36,7 +37,21 @@
                 <li class="nav-item active">
                     <a href="@Url.Action("Index", "AddMiejsce")" class="nav-link">Zgłoszenia <span class="sr-only"></span></a>
                 </li>
-
+                @if (SingInManager.IsSignedIn(User))
+                {
+                    <li class="nav-item active">
+                        <a asp-action="LogOut" asp-controller="Account" class="nav-link">Wyloguj <span class="sr-only"></span></a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item active">
+                        <a href="@Url.Action("Login", "Account")" class="nav-link">Logowanie <span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a href="@Url.Action("Register", "Account")" class="nav-link">Rejestracja <span class="sr-only"></span></a>
+                    </li>
+                }
             </ul>
         </div>
 

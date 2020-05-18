@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PC COMPUTER\\Desktop\\metodyInrzWiedzy\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj": {}
+    "C:\\Users\\PC COMPUTER\\source\\repos\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PC COMPUTER\\Desktop\\metodyInrzWiedzy\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj": {
+    "C:\\Users\\PC COMPUTER\\source\\repos\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC COMPUTER\\Desktop\\metodyInrzWiedzy\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj",
+        "projectUniqueName": "C:\\Users\\PC COMPUTER\\source\\repos\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj",
         "projectName": "BankZdjecOlsztyn",
-        "projectPath": "C:\\Users\\PC COMPUTER\\Desktop\\metodyInrzWiedzy\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj",
+        "projectPath": "C:\\Users\\PC COMPUTER\\source\\repos\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj",
         "packagesPath": "C:\\Users\\PC COMPUTER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC COMPUTER\\Desktop\\metodyInrzWiedzy\\BankZdjecOlsztyn\\obj\\",
+        "outputPath": "C:\\Users\\PC COMPUTER\\source\\repos\\BankZdjecOlsztyn\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -42,6 +42,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.3, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.3, )"
@@ -58,7 +62,7 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[3.1.1, )"
+              "version": "[3.1.2, )"
             }
           },
           "imports": [

@@ -1,0 +1,22 @@
+﻿@model BankZdjecOlsztyn.ViewsModels.LoginVM
+
+
+<form enctype="multipart/form-data" asp-action="Register" asp-controller="Account" method="post" class="form-horizontal" role="form">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="UserName">Nazwa użytkownika</label>
+        <input type="text" asp-for="UserName" class="form-control" id="UserName" placeholder="Wpisz login">
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password">Hasło</label>
+        <input type="password" asp-for="Password" class="form-control" id="Password" placeholder="Wpisz hasło">
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <div class="col-md-5">
+            <input type="submit" class="btn btn-primary" />
+
+        </div>
+    </div>
+</form>
