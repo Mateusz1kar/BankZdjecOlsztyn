@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BankZdjecOlsztyn.Models
 {
-    interface ITrasaMiejsceRepozytory
+    public interface ITrasaMiejsceRepozytory
     {
         void dodajTrasaMiejsce(TrasaMiejsce tm);
         void delTrasaMiejsce_Miejsce(int id);

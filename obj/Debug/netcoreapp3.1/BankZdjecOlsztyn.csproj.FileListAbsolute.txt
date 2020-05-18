@@ -286,4 +286,6 @@ C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\bin\Debug\netcoreapp3.1\Micro
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\Razor\Views\Tras\AddTras.cshtml.g.cs
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.csprojAssemblyReference.cache
+C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\Razor\Views\Tras\TrasList.cshtml.g.cs

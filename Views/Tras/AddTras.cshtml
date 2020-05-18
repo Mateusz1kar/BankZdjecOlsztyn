@@ -1,0 +1,106 @@
+﻿@model BankZdjecOlsztyn.ViewsModels.TrasAddVM
+
+
+<form enctype="multipart/form-data" asp-action="AddTras" asp-controller="Tras" id="sever" class="col-lg-6 offset-lg-3" method="post" role="form">
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="NazwaTrasy" class="col-2 custom-control-label">Nazwa</label>
+        <div class="col-sm-10">
+            <input asp-for="NazwaTrasy" class="form-control" />
+            <span asp-validation-summary="NazwaTrasy" class="text-danger"></span>
+        </div>
+    </div>
+
+    @*<div class="form-group">
+        <label asp-for="Opis" class="col-2 custom-control-label">Opis</label>
+        <div class="col-sm-10">
+            <input asp-for="Opis" class="form-control" />
+            <span asp-validation-summary="Opis" class="text-danger"></span>
+        </div>
+    </div>*@
+
+    
+
+    <div class="form-group">
+        <label asp-for="DlugoscTrasy" class="col-sm-2 custom-control-label">Szerokość geograficzna</label>
+        <div class="col-sm-10">
+            <input asp-for="DlugoscTrasy" id="szerokosc" class="form-control" />
+            <span asp-validation-summary="DlugoscTrasy" class="text-danger"></span>
+
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-md-5">
+            <input type="submit" class="btn btn-primary" />
+
+        </div>
+    </div>
+    <asp:CheckBoxList id="checkboxlist1"
+                      AutoPostBack="True"
+                      CellPadding="5"
+                      CellSpacing="5"
+                      RepeatColumns="2"
+                      RepeatDirection="Vertical"
+                      RepeatLayout="Flow"
+                      TextAlign="Right"
+                      OnSelectedIndexChanged="Check_Clicked"
+                      runat="server">
+        @foreach (Tag item in Model.Tagi)
+        {
+            <div class="form-check">
+                <input class="form-check-input" name="AreChecked" type="checkbox" value="@item.TagId" id="@item.Nazwa">
+                <label class="form-check-label" for="@item.Nazwa">
+                    <asp:ListItem Value="@item.TagId"> @item.Nazwa </asp:ListItem>
+                    @*@item.Nazwa*@
+                </label>
+            </div>
+        }
+
+
+    </asp:CheckBoxList>
+    <h3>Miejsca:</h3>
+    <asp:CheckBoxList id="checkboxlist2"
+                      AutoPostBack="True"
+                      CellPadding="5"
+                      CellSpacing="5"
+                      RepeatColumns="2"
+                      RepeatDirection="Vertical"
+                      RepeatLayout="Flow"
+                      TextAlign="Right"
+                      OnSelectedIndexChanged="Check_Clicked"
+                      runat="server">
+        @foreach (Miejsce item in Model.miejsca)
+        {
+            <div class="form-check">
+                
+                <input class="form-check-input" name="AreCheckedMiejsca" type="checkbox" value="@item.MiejsceId" id="@item.Nazwa">
+                <label class="form-check-label" for="@item.Nazwa">
+                    <asp:ListItem Value="@item.MiejsceId"> @item.Nazwa </asp:ListItem>
+                    @*@item.Nazwa*@
+                </label>
+            </div>
+        }
+
+
+    </asp:CheckBoxList>
+
+
+
+    @section Scripts {
+        <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+        </script>
+    }
+    <div class="col-12 text-center" id="wspuzlende">wspułżedne</div>
+</form>
+
+
