@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PC COMPUTER\\source\\repos\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj": {}
+    "C:\\Users\\PC COMPUTER\\Source\\Repos\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PC COMPUTER\\source\\repos\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj": {
+    "C:\\Users\\PC COMPUTER\\Source\\Repos\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC COMPUTER\\source\\repos\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj",
+        "projectUniqueName": "C:\\Users\\PC COMPUTER\\Source\\Repos\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj",
         "projectName": "BankZdjecOlsztyn",
-        "projectPath": "C:\\Users\\PC COMPUTER\\source\\repos\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj",
+        "projectPath": "C:\\Users\\PC COMPUTER\\Source\\Repos\\BankZdjecOlsztyn\\BankZdjecOlsztyn.csproj",
         "packagesPath": "C:\\Users\\PC COMPUTER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC COMPUTER\\source\\repos\\BankZdjecOlsztyn\\obj\\",
+        "outputPath": "C:\\Users\\PC COMPUTER\\Source\\Repos\\BankZdjecOlsztyn\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"

@@ -52,7 +52,7 @@
     for (var i = 0; i < places.length; i++) {
         var feature = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point(places[i][0], places[i][1]).transform(epsg4326, projectTo),
-            { description: places[i][3] },
+            { description: places[i][3]+ '<img src ="'+places[i][4]+'"asp-append-version="true" class="img-fluid"/>'  },
             //{ image: places[i][4]},
             { externalGraphic: places[i][2], graphicHeight: 25, graphicWidth: 21, graphicXOffset: -12, graphicYOffset: -25 }
         );
@@ -68,7 +68,7 @@
                             feature.popup = new OpenLayers.Popup.FramedCloud("pop",
                                 feature.geometry.getBounds().getCenterLonLat(),
                                 null,
-                                '<div class="markerContent">' + feature.attributes.description + '<img src ="~/images/9ee0f29d-05b3-4072-982a-ce25c7a67e8a_11.jpg" width="150" height="150">' + '</div>',
+                                '<div class="markerContent">' + feature.attributes.description  + '</div>',
                                 null,
                                 true,
                                 function () { controls['selector'].unselectAll(); }
