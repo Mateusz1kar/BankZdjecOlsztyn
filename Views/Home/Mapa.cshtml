@@ -1,116 +1,71 @@
 ﻿@model BankZdjecOlsztyn.ViewsModels.HomeViewsModel
-    <div id="map" class="map col-8"></div>
-
+<link href="~/lib/css/ol-ext.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/lib/css/ol_v5.2.0.css" type="text/css">
+<link rel="stylesheet" href="~/lib/css/ol-popup.css" type="text/css">
+<script src="~/lib/js/ol-ext.js"></script>
+<script src="~/lib/js/ol-popup.js"></script>
+<script src="~/lib/js/ol_v5.2.0.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.11/lib/OpenLayers.js"></script>
+<div id="mapdiv" class="map col-12"></div>
 
 <script type="text/javascript">
-    var mcdonald = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.fromLonLat([20.47746, 53.77309]))
-    });
-
-    var wydzial = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.fromLonLat([20.45594, 53.74374]))
-    });
-
-    var plywalnia = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.fromLonLat([20.46583, 53.75738]))
-    });
-
-
-    var wieza = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.fromLonLat([20.5175, 53.75342]))
-    });
-
-    var szpital = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.fromLonLat([20.49235, 53.76985]))
-    });
-
-
-    var vectorSource = new ol.source.Vector({
-        features: [mcdonald, wydzial, plywalnia, wieza, szpital]
-    });
-
-
-
-    var wydzial = ol.proj.fromLonLat([20.45594, 53.74374]);
-    var view = new ol.View({
-        center: wydzial,
-        zoom: 11
-    });
-
-    var vectorSource = new ol.source.Vector({});
+                    map = new OpenLayers.Map("mapdiv");
+                    map.addLayer(new OpenLayers.Layer.OSM());
+                    epsg4326 =  new OpenLayers.Projection("EPSG:4326");
+                    projectTo = map.getProjectionObject();
+    var lonLat = new OpenLayers.LonLat(20.45594, 53.74374 ).transform(epsg4326, projectTo);
+                    var zoom=14;
+                    map.setCenter (lonLat, zoom);
+                    var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
     var places = [
-
-        //[20.47746, 53.77309, 'http://maps.google.com/mapfiles/ms/micons/blue.png'], [20.45594, 53.74374, 'http://maps.google.com/mapfiles/ms/micons/blue.png'],
-        //[20.46583, 53.75738, 'http://maps.google.com/mapfiles/ms/micons/blue.png'],
-        //[20.5175, 53.75342, 'http://maps.google.com/mapfiles/ms/micons/blue.png',],
-        //[20.49235, 53.76985, 'http://maps.google.com/mapfiles/ms/micons/blue.png'],
     ];
     var ile = @Model.Miejsca.Count ;
     var tabS =[@foreach (var item in Model.Miejsca)
         {
-            @((item.szerokosc * 1000000).ToString() +',' )
+            @((item.szerokosc * 1000000000000000).ToString() +',' )
     },
     ];
-
     var tabW = [@foreach (var item in Model.Miejsca)
         {
-             @((item.wysokosc * 1000000).ToString() +',' )
+             @((item.wysokosc * 1000000000000000).ToString() +',' )
     },
     ];
-
-
     for (var i = 0; i < ile; i++) {
-
         places[i] = [];
-        places[i][0] = tabW[i]/1000000;
-        places[i][1] = tabS[i]/1000000;
+        places[i][0] = tabW[i] / 1000000000000000;
+        places[i][1] = tabS[i] / 1000000000000000;
         places[i][2] ='http://maps.google.com/mapfiles/ms/micons/blue.png';
     }
-    @*places[1][0] =  @Model.Miejsca[Model.I_Net].wysokosc;
-    places[1][1] =   @Model.Miejsca[Model.I_Net++].szerokosc ;
-    places[2][0] =  @Model.Miejsca[Model.I_Net].wysokosc;
-        places[2][1] =   @Model.Miejsca[Model.I_Net++].szerokosc ;*@
-    console.log(tabW);
-    console.log(places);
-    var features = [];
     for (var i = 0; i < places.length; i++) {
-        var iconFeature = new ol.Feature({
-            geometry: new ol.geom.Point(ol.proj.transform([places[i][0], places[i][1]], 'EPSG:4326', 'EPSG:3857')),
-        });
-
-
-        var iconStyle = new ol.style.Style({
-            image: new ol.style.Icon({
-                src: places[i][2],
-                color: places[i][3],
-                crossOrigin: 'anonymous',
-            })
-        });
-        iconFeature.setStyle(iconStyle);
-        vectorSource.addFeature(iconFeature);
+        var feature = new OpenLayers.Feature.Vector(
+            new OpenLayers.Geometry.Point(places[i][0], places[i][1]).transform(epsg4326, projectTo),
+            { description: 'This is the value of<br>the description attribute' },
+            { externalGraphic: places[i][2], graphicHeight: 25, graphicWidth: 21, graphicXOffset: -12, graphicYOffset: -25 }
+        );
+        vectorLayer.addFeatures(feature);
     }
 
+        map.addLayer(vectorLayer);
 
+        var controls = {
+                            selector: new OpenLayers.Control.SelectFeature(vectorLayer, {onSelect: createPopup, onUnselect: destroyPopup })
+        };
+        function createPopup(feature) {
+                            feature.popup = new OpenLayers.Popup.FramedCloud("pop",
+                                feature.geometry.getBounds().getCenterLonLat(),
+                                null,
+                                '<div class="markerContent">' + feature.attributes.description + '</div>',
+                                null,
+                                true,
+                                function () { controls['selector'].unselectAll(); }
+                            );
 
-    var vectorLayer = new ol.layer.Vector({
-        source: vectorSource,
-        updateWhileAnimating: true,
-        updateWhileInteracting: true
-    });
-
-    var map = new ol.Map({
-        target: 'map',
-        view: view,
-        layers: [
-            new ol.layer.Tile({
-                preload: 3,
-                source: new ol.source.OSM(),
-            }),
-            vectorLayer,
-        ],
-        loadTilesWhileAnimating: true,
-    });
+          map.addPopup(feature.popup);
+        }
+        function destroyPopup(feature) {
+                            feature.popup.destroy();
+          feature.popup = null;
+        }
+        map.addControl(controls['selector']);
+        controls['selector'].activate();
 </script>
-
-
-
