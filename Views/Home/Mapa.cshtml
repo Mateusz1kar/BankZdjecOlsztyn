@@ -23,23 +23,29 @@
     var tabS =[@foreach (var item in Model.Miejsca)
         {
             @((item.szerokosc * 1000000000000000).ToString() +',' )
-    },
+    }
     ];
     var tabW = [@foreach (var item in Model.Miejsca)
         {
              @((item.wysokosc * 1000000000000000).ToString() +',' )
-    },
+    }
     ];
+   var tabNazwa = "@foreach (var item in Model.Miejsca)
+        {
+            @((item.Nazwa.ToString()+"~"))
+    }";
+    tabNazwa = tabNazwa.split('~');
     for (var i = 0; i < ile; i++) {
         places[i] = [];
         places[i][0] = tabW[i] / 1000000000000000;
         places[i][1] = tabS[i] / 1000000000000000;
-        places[i][2] ='http://maps.google.com/mapfiles/ms/micons/blue.png';
+        places[i][2] = 'http://maps.google.com/mapfiles/ms/micons/blue.png';
+        places[i][3] = tabNazwa[i];
     }
     for (var i = 0; i < places.length; i++) {
         var feature = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point(places[i][0], places[i][1]).transform(epsg4326, projectTo),
-            { description: 'This is the value of<br>the description attribute' },
+            { description: places[i][3] },
             { externalGraphic: places[i][2], graphicHeight: 25, graphicWidth: 21, graphicXOffset: -12, graphicYOffset: -25 }
         );
         vectorLayer.addFeatures(feature);

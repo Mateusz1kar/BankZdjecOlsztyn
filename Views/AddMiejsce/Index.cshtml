@@ -188,10 +188,15 @@
     map.on('click', function (evt) {
         //var element = popup.getElement();
         var coordinate = evt.coordinate;
-        var hdms = ol.coordinate.toStringHDMS(ol.proj.toLonLat(coordinate));
-        const tab = [...hdms];
-        const szer = "" + tab[0] + tab[1] + "," + tab[4] + tab[5] + tab[8] + tab[9];
-        const wys = "" + tab[14] + tab[15] + "," + tab[18] + tab[19] + tab[22] + tab[23];
+        var hdms = ol.proj.toLonLat(coordinate);
+        var szer = "" + hdms[1];
+        szer = szer.replace(".", ",");
+        var wys = "" + hdms[0];
+        wys = wys.replace(".", ",");
+
+        // const tab = [...hdms];
+        //  const szer = "" + tab[0] + tab[1] + "," + tab[4] + tab[5] + tab[8] + tab[9];
+        //  const wys = "" + tab[14] + tab[15] + "," + tab[18] + tab[19] + tab[22] + tab[23];
         document.getElementById('wspuzlende').innerHTML = hdms;
         document.getElementById('szerokosc').value = szer;//parseFloat(szer);
         document.getElementById('wysokosc').value = wys;//parseFloat(wys);
