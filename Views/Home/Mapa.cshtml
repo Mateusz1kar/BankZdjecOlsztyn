@@ -36,7 +36,7 @@
     }";
     var tabAdres = "@foreach (var item in Model.Miejsca)
         {
-             @(("~/images/" + item.ZdieciaList.First().Url) +'$' )
+             @(("/images/" + item.ZdieciaList.First().Url) +'$' )
     }";
     
     tabNazwa = tabNazwa.split('~');
