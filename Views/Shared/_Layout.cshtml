@@ -30,9 +30,12 @@
                 <li class="nav-item active">
                     <a id="elem_nav" href="@Url.Action("Mapa", "Home")" class="nav-link">Mapa <span class="sr-only"></span></a>
                 </li>
+                @if (SingInManager.IsSignedIn(User))
+                {
                 <li class="nav-item active">
                     <a id="elem_nav" href="@Url.Action("Index", "AddMiejsce")" class="nav-link">Zgłoszenia <span class="sr-only"></span></a>
                 </li>
+                }
                 @if (SingInManager.IsSignedIn(User))
                 {
                     <li class="nav-item active">
@@ -41,7 +44,7 @@
                 }
                 else
                 {
-                    <li id="dropdown" class=" hoverFade">
+                    <li id="dropdown" class="clickSlide">
                         <a>Dołącz do nas!</a>
                         <ul>
                             <li><a id="drop_elem" href="@Url.Action("Login","Account")">Zaloguj się</a></li>
@@ -69,16 +72,17 @@
     </footer>
 
 
-    <script>
-        $(document).ready(function () {
-            // NAV TOGGLE ONHOVER WITH FADE
-            $(".hoverFade ul").hide();
-            $(".hoverFade").hover(function () {
-                $(this).children("ul").stop(true, true).fadeToggle("fast"),
-                    $(this).toggleClass("dropdown-active");
-            });
+    <script type="text/javascript">
+      $(document).ready(function() {
 
-        });
+  // NAV TOGGLE ONCLICK WITH SLIDE
+  $(".clickSlide ul").hide();
+  $(".clickSlide").click(function() {
+    $(this).children("ul").stop(true, true).slideToggle("fast"),
+      $(this).toggleClass("dropdown-active");
+  });
+
+});
     </script>
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>

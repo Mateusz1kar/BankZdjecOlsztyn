@@ -230,6 +230,7 @@ visited {
         display: inline-block;
         padding: 5px 50px 5px 10px;
         border: 1px solid #ccc;
+        width:160px;
     }
 
         .dropdown-check-list .anchor:after {
@@ -272,6 +273,7 @@ visited {
 
 .dropdown-check-list.visible .anchor {
     color: #0094ff;
+   
 }
 
 .dropdown-check-list.visible .items {
