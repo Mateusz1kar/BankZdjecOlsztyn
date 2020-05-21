@@ -11,7 +11,7 @@ namespace BankZdjecOlsztyn.Models
         void delZdjecie(int id);
         IEnumerable<Zdjecie> PobierzWszustkieZdjecie();
         Zdjecie PobierzZdjecieId(int ZdjecieId);
-
+        IEnumerable<Zdjecie> PobierzZdjecieMiejsce(Miejsce m);
 
     }
 }

@@ -65,5 +65,20 @@ namespace BankZdjecOlsztyn.Controllers
             };
             return View(homeVM);
         }
+        public IActionResult Miejsce(int id2)
+        {
+            var miejsce = _miejscaRepozytory.PobierzMiejsceId(id2);
+            var zdjecia = _zdjecieRepozytory.PobierzWszustkieZdjecie();
+            var tagi = _tagRepozytory.PobierzWszustkieTagi();
+            var miejsceTag = _miejsceTagRepozytory.PobierzWszustkieMijescaTagi();
+            var newMiejsceVM = new MiejsceVM()
+            {
+                Miejsca = miejsce,
+                Zdjecia = zdjecia.ToList(),
+                Tagi = tagi.ToList(),
+                MiejscaTagi = miejsceTag.ToList(),
+            };
+            return View(newMiejsceVM);
+        }
     }
 }
