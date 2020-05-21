@@ -5,8 +5,10 @@
 }
 
 .map {
+
     width: 100%;
     height: 400px;
+
 }
 
 .navbar-bg {
@@ -20,20 +22,114 @@ body {
 }
 
 .body-content {
-    padding: 10px;
-    margin-top: 10px;
+    padding: 20px;
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
     min-height: calc(100vh - 70px);
 }
 
-
-.footer {
-    margin-top: 12px;
-    height: 50px;
-    background-color: #106269;
+.register {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #fff;
+    width: 285px;
+    margin: -140px 0 0 -182px;
+    padding: 40px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
+    .register input {
+        outline: none;
+        display: block;
+        width: 100%;
+        margin: 0 0 20px;
+        padding: 10px 15px;
+        border: 1px solid #ccc;
+        color: #ccc;
+        font-family: "Roboto";
+        box-sizing: border-box;
+        font-size: 14px;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transition: 0.2s linear;
+    }
+
+    .register button {
+        cursor: pointer;
+        background: #dcab78;
+        width: 100%;
+        padding: 10px 15px;
+        border: 0;
+        color: #fff;
+        font-family: "Roboto";
+        font-size: 14px;
+        font-weight: 400;
+    }
+    .register button:hover{
+        background: #956e58;
+    }
+
+
+.login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #fff;
+    width: 285px;
+    margin: -140px 0 0 -182px;
+    padding: 40px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+
+    
+}
+.login input {
+        outline: none;
+        display: block;
+        width: 100%;
+        margin: 0 0 20px;
+        padding: 10px 15px;
+        border: 1px solid #ccc;
+        color: #ccc;
+        font-family: "Roboto";
+        box-sizing: border-box;
+        font-size: 14px;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transition: 0.2s linear;
+    }
+
+    .login button {
+        cursor: pointer;
+        background: #dcab78;
+        width: 100%;
+        padding: 10px 15px;
+        border: 0;
+        color: #fff;
+        font-family: "Roboto";
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+
+        .login button:hover {
+            background: #956e58;
+        }
+        .footer {
+            margin-top: 12px;
+            height: 50px;
+            background-color: #106269;
+        }
+
+footer p{
+    padding:10px;
+    margin:auto;
+    color:#ffffff;
+    text-align:center;
+}
 #navbarSupportedContent {
     z-index: 9999;
 }
