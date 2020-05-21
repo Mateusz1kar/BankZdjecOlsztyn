@@ -52,7 +52,7 @@
     for (var i = 0; i < places.length; i++) {
         var feature = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point(places[i][0], places[i][1]).transform(epsg4326, projectTo),
-            { description: places[i][3]+ '<img src ="'+places[i][4]+'"asp-append-version="true" class="img-fluid"/>'  },
+            { description: places[i][3]+ '<img src ="'+places[i][4]+'"asp-append-version="true" width="500" height="500" class="img-fluid"/>'  },
             //{ image: places[i][4]},
             { externalGraphic: places[i][2], graphicHeight: 25, graphicWidth: 21, graphicXOffset: -12, graphicYOffset: -25 }
         );
