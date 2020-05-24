@@ -15,14 +15,16 @@ namespace BankZdjecOlsztyn.Controllers
     {
         private readonly ITrasaRepozytory _trasaRepozytory;
         private readonly IMiejscaRepozytory _miejscaRepozytory;
+        private readonly IMiejsceTagRepozytory _miejsceTagRepozytory;
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly ITagRepozytory _tagRepozytory;
         private readonly ITrasaTagRepozytory _trasaTagRepozytory;
         private readonly ITrasaMiejsceRepozytory _trasaMiejsceRepozytory;
+        private readonly IZdjecieRepozytory _zdjecieRepozytory;
         //komunikacja z forderem root
         // private readonly IZdjecieRepozytory _zdjecieRepozytory;
-        public TrasController(ITrasaRepozytory trasaRepozytory, IHostingEnvironment hostingEnvironment, ITagRepozytory tagRepozytory,
-            IMiejscaRepozytory miejscaRepozytory, ITrasaTagRepozytory trasaTagRepozytory, ITrasaMiejsceRepozytory trasaMiejsceRepozytory)
+        public TrasController(ITrasaRepozytory trasaRepozytory, IHostingEnvironment hostingEnvironment, ITagRepozytory tagRepozytory, IZdjecieRepozytory zdjecieRepozytory,
+            IMiejscaRepozytory miejscaRepozytory, ITrasaTagRepozytory trasaTagRepozytory, ITrasaMiejsceRepozytory trasaMiejsceRepozytory, IMiejsceTagRepozytory miejsceTagRepozytory)
         {
             _trasaRepozytory = trasaRepozytory;
             this.hostingEnvironment = hostingEnvironment;
@@ -30,7 +32,8 @@ namespace BankZdjecOlsztyn.Controllers
             _miejscaRepozytory = miejscaRepozytory;
             _trasaTagRepozytory=  trasaTagRepozytory;
             _trasaMiejsceRepozytory = trasaMiejsceRepozytory;
-            //_zdjecieRepozytory = zdjecieRepozytory;
+            _miejsceTagRepozytory =  miejsceTagRepozytory;
+            _zdjecieRepozytory = zdjecieRepozytory;
         }
         // GET: /<controller>/
         public IActionResult AddTras()
@@ -125,6 +128,34 @@ namespace BankZdjecOlsztyn.Controllers
         {
             _trasaRepozytory.delTrasa(id);
             return Redirect("../Tras/TrasList");
+        }
+        public IActionResult WyswietlTrase(int id)
+        {
+            Trasa trasa = _trasaRepozytory.PobierzTrasa_Id(id);
+            List<Miejsce> miejsca = new List<Miejsce>();
+            List<Miejsce> pomMiejsca = _miejscaRepozytory.PobierzWszustkieMiejsca().ToList();
+            List<MiejsceTag> miejsceTags = new List<MiejsceTag>();
+            List<TrasaMiejsce> trasM = _trasaMiejsceRepozytory.PobierzTrasaMiejsce_IdTrasa(id).ToList();
+            List<MiejsceTag> pomMT = _miejsceTagRepozytory.PobierzWszustkieMijescaTagi().ToList();
+            List<Zdjecie> pomZ = _zdjecieRepozytory.PobierzWszustkieZdjecie().ToList();
+            foreach (var tm in trasM)
+            {
+                miejsca.Add(tm.Miejsce);
+                foreach (var item in _miejscaRepozytory.PobierzMiejsceId(tm.MiejsceId).MiejsceTag)
+                {
+                    miejsceTags.Add(item);
+                }
+            }
+
+            var model = new HomeViewsModel()
+            {
+                id2 = id,
+                Miejsca = miejsca,
+                Tagi = _tagRepozytory.PobierzWszustkieTagi().ToList(),
+                MiejscaTagi = miejsceTags,
+                Tytul = "Trasa" + trasa.NazwaTrasy
+            };
+            return View( model);
         }
     }
 }
