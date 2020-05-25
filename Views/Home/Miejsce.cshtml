@@ -1,0 +1,27 @@
+﻿@model BankZdjecOlsztyn.ViewsModels.MiejsceVM
+
+
+
+
+
+    @{var photoPath = "~/images/" + Model.Miejsca.ZdieciaList.First().Url; }
+    <div class="col-12">
+        <img src="@photoPath" asp-append-version="true" class="img-fluid" />
+        <h3>@Model.Miejsca.MiejsceId</h3>
+        <h3>@Model.Miejsca.Nazwa </h3>
+        <h4>@Model.Miejsca.Opis</h4>
+        @foreach (var item in Model.Miejsca.MiejsceTag)
+        {
+            <h5 class="text-primary">@item.Tag.Nazwa</h5>
+        }
+
+        <form asp-controller="DelMiejsce" asp-action="Delete" method="post" class="form-horizontal " role="form">
+            <div class="col-md-5 " style="display:none">
+                <input asp-for="id2" value="@Model.Miejsca.MiejsceId" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Delete" class="btn btn-outline-danger" />
+            </div>
+        </form>
+
+    </div>

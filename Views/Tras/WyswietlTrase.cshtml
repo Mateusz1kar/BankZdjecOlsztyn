@@ -9,7 +9,6 @@
 <div id="mapdiv" class="map col-12"></div>
 
 <script type="text/javascript">
-
                     map = new OpenLayers.Map("mapdiv");
                     map.addLayer(new OpenLayers.Layer.OSM());
                     epsg4326 =  new OpenLayers.Projection("EPSG:4326");
@@ -18,21 +17,17 @@
                     var zoom=14;
                     map.setCenter (lonLat, zoom);
                     var vectorLayer = new OpenLayers.Layer.Vector("Overlay");
-
     var places = [
     ];
     var ile = @Model.Miejsca.Count ;
     var tabS =[@foreach (var item in Model.Miejsca)
         {
             @((item.szerokosc * 1000000000000000).ToString() +',' )
-
     }
-
     ];
     var tabW = [@foreach (var item in Model.Miejsca)
         {
              @((item.wysokosc * 1000000000000000).ToString() +',' )
-
     }
     ];
     var tabNazwa = "@foreach (var item in Model.Miejsca)
@@ -50,12 +45,10 @@
         places[i] = [];
         places[i][0] = tabW[i] / 1000000000000000;
         places[i][1] = tabS[i] / 1000000000000000;
-
         places[i][2] = 'http://maps.google.com/mapfiles/ms/micons/blue.png';
         places[i][3] = tabNazwa[i];
         places[i][4] = tabAdres[i];
     }
-
     for (var i = 0; i < places.length; i++) {
         var feature = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point(places[i][0], places[i][1]).transform(epsg4326, projectTo),

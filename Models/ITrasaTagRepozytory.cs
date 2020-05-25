@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BankZdjecOlsztyn.Models
 {
-    interface ITrasaTagRepozytory
+    public interface ITrasaTagRepozytory
     {
         void dodajTrasaTag(TrasaTag tt);
         void delTrasaTagTag(int id);

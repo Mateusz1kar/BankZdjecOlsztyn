@@ -27,13 +27,17 @@ namespace BankZdjecOlsztyn
             services.AddTransient<IZdjecieRepozytory, ZdjenciaRepozytory>();
             services.AddTransient<ITagRepozytory, TagRepozytory>();
             services.AddTransient<IMiejsceTagRepozytory, MiejsceTagRepozytory>();
+
+            services.AddTransient<ITrasaRepozytory, TrasaRepozytory>();
+            services.AddTransient<ITrasaMiejsceRepozytory, TrasaMiejsceRepozytory>();
+            services.AddTransient<ITrasaTagRepozytory, TrasaTagRepozytory>();
             //services.AddMvc();
             services.AddControllersWithViews();
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
             //autoryzacja urzytkownika
 
-          
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

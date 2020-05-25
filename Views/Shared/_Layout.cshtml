@@ -41,6 +41,9 @@
                     <li class="nav-item active">
                         <a id="elem_nav" asp-action="LogOut" asp-controller="Account" class="nav-link">Wyloguj <span class="sr-only"></span></a>
                     </li>
+                    <li class="nav-item active">
+                        <a asp-action="AddTras" asp-controller="Tras" class="nav-link">Add Tras <span class="sr-only"></span></a>
+                    </li>
                 }
                 else
                 {
@@ -50,6 +53,12 @@
                             <li><a id="drop_elem" href="@Url.Action("Login","Account")">Zaloguj się</a></li>
                             <li><a id="drop_elem" href="@Url.Action("Register","Account")">Zarejstruj się</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item active">
+                        <a asp-action="AddTras" asp-controller="Tras" class="nav-link">Add Tras <span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a asp-action="TrasList" asp-controller="Tras" class="nav-link">Tras List <span class="sr-only"></span></a>
                     </li>
                 }
             </ul>

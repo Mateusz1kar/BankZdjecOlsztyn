@@ -39,5 +39,15 @@ namespace BankZdjecOlsztyn.Models
         {
             return _appDbContext.Zdjecia.FirstOrDefault(z => z.MiejsceId == ZdjecieId);
         }
+
+        public IEnumerable<Zdjecie> PobierzZdjecieMiejsce(Miejsce m)
+        {
+            //List<Zdjecie> wynik = new List<Zdjecie>();
+            //foreach (var item in m.ZdieciaList)
+            //{
+            //    wynik.Add(ite)
+            //}
+            return m.ZdieciaList;
+        }
     }
 }
