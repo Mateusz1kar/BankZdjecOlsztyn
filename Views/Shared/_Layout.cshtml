@@ -39,10 +39,10 @@
                 @if (SingInManager.IsSignedIn(User))
                 {
                     <li class="nav-item active">
-                        <a asp-action="AddTras" asp-controller="Tras" class="nav-link">Add Tras <span class="sr-only"></span></a>
+                        <a asp-action="AddTras"  id="elem_nav"asp-controller="Tras" class="nav-link">Add Tras <span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item active">
-                        <a asp-action="TrasList" asp-controller="Tras" class="nav-link">Tras List <span class="sr-only"></span></a>
+                        <a asp-action="TrasList"  id="elem_nav" asp-controller="Tras" class="nav-link">Tras List <span class="sr-only"></span></a>
                     </li>
                     <li class="nav-item active">
                         <a id="elem_nav" asp-action="LogOut" asp-controller="Account" class="nav-link">Wyloguj <span class="sr-only"></span></a>
@@ -52,7 +52,7 @@
                 else
                 {
                     <li class="nav-item active">
-                        <a asp-action="TrasList" asp-controller="Tras" class="nav-link">Tras List <span class="sr-only"></span></a>
+                        <a  id="elem_nav" asp-action="TrasList" asp-controller="Tras" class="nav-link">Tras List <span class="sr-only"></span></a>
                     </li>
                     <li id="dropdown" class="clickSlide">
                         <a>Dołącz do nas!</a>

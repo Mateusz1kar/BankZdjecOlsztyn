@@ -291,3 +291,4 @@ C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\Razor
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\Razor\Views\Home\Miejsce.cshtml.g.cs
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\Razor\Views\Tras\WyswietlTrase.cshtml.g.cs
 C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\BankZdjecOlsztyn.csprojAssemblyReference.cache
+C:\Users\PC COMPUTER\source\repos\BankZdjecOlsztyn\obj\Debug\netcoreapp3.1\Razor\Views\AddMiejsce\AddZdjecie.cshtml.g.cs

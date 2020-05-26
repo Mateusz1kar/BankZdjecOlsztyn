@@ -15,6 +15,7 @@ namespace BankZdjecOlsztyn.ViewsModels
         public List<MiejsceTag> MiejscaTagi { get; set; }
         public List<Tag> Tagi { get; set; }
         public int I_Net { get; set; }
+
        
     }
 }

@@ -1,12 +1,18 @@
 ﻿@model BankZdjecOlsztyn.ViewsModels.MiejsceVM
 
 
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,URL"></script>
 
 
 
-    @{var photoPath = "~/images/" + Model.Miejsca.ZdieciaList.First().Url; }
+
     <div class="col-12">
-        <img src="@photoPath" asp-append-version="true" class="img-fluid" />
+        @{ foreach (var item in Model.Miejsca.ZdieciaList)
+            {
+                var photoPath = "~/images/" + item.Url; 
+                <img src="@photoPath" asp-append-version="true" class="img-fluid" />
+            }}
+
         <h3>@Model.Miejsca.MiejsceId</h3>
         <h3>@Model.Miejsca.Nazwa </h3>
         <h4>@Model.Miejsca.Opis</h4>
@@ -14,6 +20,27 @@
         {
             <h5 class="text-primary">@item.Tag.Nazwa</h5>
         }
+
+        <form enctype="multipart/form-data" id="sever" asp-action="AddZdjecie" asp-controller="AddMiejsce" method="post" class="form-horizontal " role="form">
+            <div class="form-group">
+                <div class="col-md-5 " style="display:none">
+                    <input asp-for="id2" value="@Model.Miejsca.MiejsceId" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="ZdjecieAdd" class="col-sm-2 col-form-label">Zdjęcie</label>
+                    <div class="col-sm-10">
+                        <div class="custom-file">
+                            <input asp-for="ZdjecieAdd" class="form-control custom-file-input" />
+                            <label class=" custom-file-label">Wybierz zdjęcie...</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Dodaj" class="btn btn-outline-danger" />
+            </div>
+        </form>
+
 
         <form asp-controller="DelMiejsce" asp-action="Delete" method="post" class="form-horizontal " role="form">
             <div class="col-md-5 " style="display:none">
@@ -25,3 +52,13 @@
         </form>
 
     </div>
+@section Scripts {
+    <script>
+            $(document).ready(function () {
+                $('.custom-file-input').on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+            });
+    </script>
+}
