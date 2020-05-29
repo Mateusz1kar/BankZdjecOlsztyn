@@ -131,25 +131,24 @@
 
 </form>
 
-
-<div id="map" class="map col-lg-6 offset-lg-3"></div>
-<div id="popup" class="ol-popup">
-    <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-    <div id="popup-content"></div>
-</div>
+<script src="~/mapa.js"></script>
 
 
-<div style="display: none;">
-    <!-- Clickable label for Vienna -->
-    <a class="overlay" id="vienna" target="_blank" href="http://en.wikipedia.org/wiki/Vienna">Vienna</a>
-    <div id="marker" title="Marker"></div>
-    <!-- Popup -->
-    <div id="popup" title="Welcome to OpenLayers"></div>
-</div>
+
 <script type="text/javascript">
+    // Get the modal
+    var modal = document.getElementById("myModal");
 
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
 
-    var wydzial = ol.proj.fromLonLat([20.45594, 53.74374]);
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+        modal.style.display = "block";
+         var wydzial = ol.proj.fromLonLat([20.45594, 53.74374]);
     var view = new ol.View({
         center: wydzial,
         zoom: 11
@@ -165,32 +164,7 @@
         target: 'map',
         view: view
     });
-
-    //var pos = ol.fromLonLat([16.3725, 48.208889]);
-
-    //// Vienna marker
-    //var marker = new ol.Overlay({
-    //    position: pos,
-    //    positioning: 'center-center',
-    //    element: document.getElementById('marker'),
-    //    stopEvent: false
-    //});
-    //map.addOverlay(marker);
-
-    //// Vienna label
-    //var vienna = new ol.Overlay({
-    //    position: pos,
-    //    element: document.getElementById('vienna')
-    //});
-    //map.addOverlay(vienna);
-
-    //// Popup showing the position the user clicked
-    //var popup = new ol.Overlay({
-    //    element: document.getElementById('popup')
-    //});
-    //map.addOverlay(popup);
-
-    map.on('click', function (evt) {
+          map.on('click', function (evt) {
         //var element = popup.getElement();
         var coordinate = evt.coordinate;
         var hdms = ol.proj.toLonLat(coordinate);
@@ -199,9 +173,9 @@
         var wys = "" + hdms[0];
         wys = wys.replace(".", ",");
 
-            // const tab = [...hdms];
-      //  const szer = "" + tab[0] + tab[1] + "," + tab[4] + tab[5] + tab[8] + tab[9];
-      //  const wys = "" + tab[14] + tab[15] + "," + tab[18] + tab[19] + tab[22] + tab[23];
+        // const tab = [...hdms];
+        //  const szer = "" + tab[0] + tab[1] + "," + tab[4] + tab[5] + tab[8] + tab[9];
+        //  const wys = "" + tab[14] + tab[15] + "," + tab[18] + tab[19] + tab[22] + tab[23];
         document.getElementById('wspuzlende').innerHTML = hdms;
         document.getElementById('szerokosc').value = szer;//parseFloat(szer);
         document.getElementById('wysokosc').value = wys;//parseFloat(wys);
@@ -215,22 +189,9 @@
         //});
         //$(element).popover('show');
     });
-</script>
 
-<script type="text/javascript">
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal
-    btn.onclick = function () {
-        modal.style.display = "block";
     }
+  
 
     // When the user clicks on <span> (x), close the modal
     span.onclick = function () {
@@ -244,6 +205,9 @@
         }
     }
 </script>
+
+
+
 
 <script type="text/javascript">
 
