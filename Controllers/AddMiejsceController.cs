@@ -16,14 +16,22 @@ namespace BankZdjecOlsztyn.Controllers
     {
         private readonly IMiejscaRepozytory _IMiejscaRepozytory;
         private readonly IHostingEnvironment hostingEnvironment;
+        private readonly IZdjecieRepozytory _zdjecieRepozytory;
         private readonly ITagRepozytory _tagRepozytory;
+        private readonly IMiejscaRepozytory _miejscaRepozytory;
+        private readonly IMiejsceTagRepozytory _miejsceTagRepozytory;
         //komunikacja z forderem root
        // private readonly IZdjecieRepozytory _zdjecieRepozytory;
-        public AddMiejsceController( IMiejscaRepozytory miejsceRepozytory, IHostingEnvironment hostingEnvironment, ITagRepozytory tagRepozytory)
+        public AddMiejsceController( IMiejscaRepozytory miejsceRepozytory, IHostingEnvironment hostingEnvironment, ITagRepozytory tagRepozytory, IZdjecieRepozytory zdjecieRepozytory,
+            IMiejscaRepozytory miejscaRepozytory, IMiejsceTagRepozytory miejsceTagRepozytory)
         {
             _IMiejscaRepozytory = miejsceRepozytory;
             this.hostingEnvironment = hostingEnvironment;
             _tagRepozytory = tagRepozytory;
+            _zdjecieRepozytory = zdjecieRepozytory;
+            _miejscaRepozytory = miejscaRepozytory;
+            _miejsceTagRepozytory = miejsceTagRepozytory;
+                
             //_zdjecieRepozytory = zdjecieRepozytory;
         }
 
@@ -110,6 +118,50 @@ namespace BankZdjecOlsztyn.Controllers
         public IActionResult miejsceZgloszone()
         {
             return View();
+        }
+        [HttpPost]
+        public IActionResult AddZdjecie(MiejsceVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                string uniquefileName = null;
+                if (model.ZdjecieAdd != null)
+                {
+                    string uploatFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                    uniquefileName = Guid.NewGuid().ToString() + "_" + model.ZdjecieAdd.FileName;
+                    string filePath = Path.Combine(uploatFolder, uniquefileName);
+                    model.ZdjecieAdd.CopyTo(new FileStream(filePath, FileMode.Create));
+                    var pomM = _IMiejscaRepozytory.PobierzWszustkieMiejsca().ToList();
+                    var pomZ = _zdjecieRepozytory.PobierzWszustkieZdjecie().ToList();
+                    
+                    Miejsce m = _IMiejscaRepozytory.PobierzMiejsceId(model.id2);
+                    Zdjecie z = new Zdjecie
+                    {
+                        Miejsce = m,
+                        MiejsceId = m.MiejsceId,
+                        Url = uniquefileName
+                    };
+                    _zdjecieRepozytory.dodajZdjecie(z);
+                    //m.ZdieciaList.Add(new Zdjecie
+                    //{
+                    //    Url = uniquefileName
+                    //});
+
+                    var miejsce = _miejscaRepozytory.PobierzMiejsceId(model.id2);
+                    var zdjecia = _zdjecieRepozytory.PobierzWszustkieZdjecie();
+                    var tagi = _tagRepozytory.PobierzWszustkieTagi();
+                    var miejsceTag = _miejsceTagRepozytory.PobierzWszustkieMijescaTagi();
+
+                    model.Miejsca = miejsce;
+                    model.Zdjecia = zdjecia.ToList();
+                    model.Tagi = tagi.ToList();
+                    model.MiejscaTagi = miejsceTag.ToList();
+                   
+                    return View("../Home/Miejsce", model);
+                    //return RedirectToAction("../Home/Miejsce");
+                }
+            }
+             return View();
         }
     }
 }
