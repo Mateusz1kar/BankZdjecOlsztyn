@@ -357,15 +357,28 @@ visited {
         border-top: none;
     }
 
+   
+
+
 #items.items.visible {
     position: absolute;
-    background-color: #dcab78;
+    background-color: #fff;
     z-index: 995;
 }
+
+
+#itemsy.items.visible {
+    position: absolute;
+    background-color: #fff;
+    z-index: 993;
+    border: 1px solid #956e58;
+}
+
 
 .dropdown-check-list ul.items li {
     list-style: none;
 }
+
 
 .dropdown-check-list.visible .anchor {
     color: #0094ff;
@@ -381,14 +394,35 @@ visited {
     border-radius: 9px;
 }
 
+#itemsy {
+    border-radius: 9px;
+}
+
 #item {
     padding: 1px;
     border-bottom: 1px solid #956e58;
 }
+
+#item {
+    padding: 1px;
+    border-bottom: 1px solid #956e58;
+}
+
 
 input[type=checkbox] {
     transform: scale(1.5);
     margin: 2px;
     padding: 3px;
     border: 1px dotted #956e58
+}
+
+.btn{
+    background-color:#dcab78;
+    border: 0.5px solid #956e58;
+    color:rgb(0,0,0);
+}
+
+#submit{
+    margin:auto;
+
 }
