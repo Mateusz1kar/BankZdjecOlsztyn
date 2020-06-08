@@ -1,43 +1,50 @@
 ﻿@model BankZdjecOlsztyn.ViewsModels.TrasListVM
+@using Microsoft.AspNetCore.Identity;
 
+@inject SignInManager<IdentityUser>  SingInManager
 
 <h2 class="col-12">Przegląd Tras</h2>
 
 @foreach (var trasa in Model.Trasy)
 {
-<div class="col-12">
-    <h3>@trasa.TrasaID  Nazwa:@trasa.NazwaTrasy  Długość:@trasa.DlugoscTrasy</h3>
+    <div class="col-12">
+        <h3>@trasa.TrasaID  Nazwa:@trasa.NazwaTrasy  Długość:@trasa.DlugoscTrasy</h3>
 
 
 
-    @foreach (var item in trasa.TrasaTag)
-    {
-        <h5 class="text-primary">@item.Tag.Nazwa</h5>
+        @foreach (var item in trasa.TrasaTag)
+        {
+            <h5 class="text-primary">@item.Tag.Nazwa</h5>
 
-    }
-    <h4>Miejsca</h4>
-    @foreach (var m in trasa.TrasaMiejsce)
-    {
-        <h5> @m.Miejsce.Nazwa</h5>
-    }
+        }
+        <h4>Miejsca</h4>
+        @if ( trasa.TrasaMiejsce!= null)
+        { 
+            @foreach (var m in trasa.TrasaMiejsce)
+            {
+                <h5> @m.Miejsce.Nazwa</h5>
+            }
+        }
+        @if (SingInManager.IsSignedIn(User))
+        {
+            <form asp-controller="Tras" asp-action="DeleteTras" method="post" class="form-horizontal " role="form">
+                <div class="col-md-5 " style="display:none">
+                    <input asp-for="id" value="@trasa.TrasaID" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Delete" class="btn btn-outline-danger" />
+                </div>
+            </form>
+        }
+        <form asp-controller="Tras" asp-action="WyswietlTrase" method="post" class="form-horizontal " role="form">
+            <div class="col-md-5 " style="display:none">
+                <input asp-for="id" value="@trasa.TrasaID" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Wyswietl Trase" class="btn btn-outline-danger" />
+            </div>
 
-    <form asp-controller="Tras" asp-action="DeleteTras" method="post" class="form-horizontal " role="form">
-        <div class="col-md-5 " style="display:none">
-            <input asp-for="id" value="@trasa.TrasaID" />
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Delete" class="btn btn-outline-danger" />
-        </div>
-    </form>
-    <form asp-controller="Tras" asp-action="WyswietlTrase" method="post" class="form-horizontal " role="form">
-        <div class="col-md-5 " style="display:none">
-            <input asp-for="id" value="@trasa.TrasaID" />
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Wyswietl Trase" class="btn btn-outline-danger" />
-        </div>
+        </form>
 
-    </form>
-
-</div>
+    </div>
 }

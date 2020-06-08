@@ -40,6 +40,7 @@ namespace BankZdjecOlsztyn.Controllers
         public IActionResult Delete(int id2)
         {
             // HttpPostAttribute x = new HttpPostAttribute["id"];
+           
             _trasaMiejsceRepozytory.delTrasaMiejsce_Miejsce(id2);
 
             _miejscaRepozytory.delMiejsce( id2);

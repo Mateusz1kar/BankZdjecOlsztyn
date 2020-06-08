@@ -43,6 +43,12 @@
         {
              @(("/images/" + item.ZdieciaList.First().Url) +'$' )
     }";
+     var tabMId = [@foreach (var item in Model.Miejsca)
+        {
+             @((item.MiejsceId).ToString() +',' )
+
+    }
+    ];
     
     tabNazwa = tabNazwa.split('~');
     tabAdres = tabAdres.split('$');
@@ -54,12 +60,13 @@
         places[i][2] = 'http://maps.google.com/mapfiles/ms/micons/blue.png';
         places[i][3] = tabNazwa[i];
         places[i][4] = tabAdres[i];
+        places[i][5] = tabMId[i];
     }
 
     for (var i = 0; i < places.length; i++) {
         var feature = new OpenLayers.Feature.Vector(
             new OpenLayers.Geometry.Point(places[i][0], places[i][1]).transform(epsg4326, projectTo),
-            { description: places[i][3]+ '<img src ="'+places[i][4]+'"asp-append-version="true" width="500" height="500" class="img-fluid"/> <form asp-controller="Home" asp-action="Miejsce" method="post" class="form-horizontal " role="form"> <div class="col-md-5 " style="display:none">            <input asp-for="id2" value="38" /></div><div class="form-group"><input type="submit" value="Wyświetl" class="btn btn-outline-danger" /> </div></form>'  },
+            { description: '<h3 class="text-center">'+places[i][3]+ '</h3></br><img src ="'+places[i][4]+'"asp-append-version="true" width="500" height="500" class="img-fluid"/>'  },
             //{ image: places[i][4]},
             { externalGraphic: places[i][2], graphicHeight: 25, graphicWidth: 21, graphicXOffset: -12, graphicYOffset: -25 }
         );

@@ -1,47 +1,49 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    
+
 }
-
+@using Microsoft.AspNetCore.Identity;
 @model BankZdjecOlsztyn.ViewsModels.HomeViewsModel
-
+@inject SignInManager<IdentityUser>  SingInManager
 <h2 class="col-12">Przegląd miejsc</h2>
 
 @foreach (var miejsce in Model.Miejsca)
 {
     var photoPath = "~/images/" + miejsce.ZdieciaList.First().Url;
-<div class="col-sm-6 col-lg-4">
+    <div class="col-sm-6 col-lg-4">
 
-    <imput type="submit"><img src="@photoPath" asp-append-version="true" class="img-fluid" /></imput>
+        <imput type="submit"><img src="@photoPath" asp-append-version="true" class="img-fluid" /></imput>
 
 
-    <h3>@miejsce.MiejsceId</h3>
-    <h3>@miejsce.Nazwa </h3>
-    <h4>@miejsce.Opis</h4>
-    @foreach (var item in miejsce.MiejsceTag)
-    {
-        <h5 class="text-primary">@item.Tag.Nazwa</h5>
-    }
+        <h3>@miejsce.MiejsceId</h3>
+        <h3>@miejsce.Nazwa </h3>
+        <h4>@miejsce.Opis</h4>
+        @foreach (var item in miejsce.MiejsceTag)
+        {
+            <h5 class="text-primary">@item.Tag.Nazwa</h5>
+        }
+        @if (SingInManager.IsSignedIn(User))
+        {
+            <form asp-controller="DelMiejsce" asp-action="Delete" method="post" class="form-horizontal " role="form">
+                <div class="col-md-5 " style="display:none">
+                    <input asp-for="id2" value="@miejsce.MiejsceId" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Delete" class="btn btn-outline-danger" />
+                </div>
+            </form>
+        }
+        <form asp-controller="Home" asp-action="Miejsce" method="post" class="form-horizontal " role="form">
+            <div class="col-md-5 " style="display:none">
+                <input asp-for="id2" value="@miejsce.MiejsceId" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Wyświetl" class="btn btn-outline-danger" />
+            </div>
+        </form>
 
-    <form asp-controller="DelMiejsce" asp-action="Delete" method="post" class="form-horizontal " role="form">
-        <div class="col-md-5 " style="display:none">
-            <input asp-for="id2" value="@miejsce.MiejsceId" />
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Delete" class="btn btn-outline-danger" />
-        </div>
-    </form>
-    <form asp-controller="Home" asp-action="Miejsce" method="post" class="form-horizontal " role="form">
-        <div class="col-md-5 " style="display:none">
-            <input asp-for="id2" value="@miejsce.MiejsceId" />
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Wyświetl" class="btn btn-outline-danger" />
-        </div>
-    </form>
+    </div>
 
-</div>
-    
 
 }
 
