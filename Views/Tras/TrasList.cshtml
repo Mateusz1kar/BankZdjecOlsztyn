@@ -3,18 +3,19 @@
 
 @inject SignInManager<IdentityUser>  SingInManager
 
-<h2 class="col-12">Przegląd Tras</h2>
+<h2 class="col-12">Trasy</h2>
 
 @foreach (var trasa in Model.Trasy)
 {
-    <div class="col-12">
-        <h3>@trasa.TrasaID  Nazwa:@trasa.NazwaTrasy  Długość:@trasa.DlugoscTrasy</h3>
-
+    <div class="col-sm-6 col-lg-4">
+        <h5>Trasa @trasa.TrasaID :</h5>
+        <h3>@trasa.NazwaTrasy</h3>
+        <span>Długość trasy: @trasa.DlugoscTrasy</span>
 
 
         @foreach (var item in trasa.TrasaTag)
         {
-            <h5 class="text-primary">@item.Tag.Nazwa</h5>
+            <p style="font-size:12px">@item.Tag.Nazwa</p>
 
         }
         <h4>Miejsca</h4>
@@ -22,7 +23,7 @@
         { 
             @foreach (var m in trasa.TrasaMiejsce)
             {
-                <h5> @m.Miejsce.Nazwa</h5>
+                <li> @m.Miejsce.Nazwa</li>
             }
         }
         @if (SingInManager.IsSignedIn(User))
